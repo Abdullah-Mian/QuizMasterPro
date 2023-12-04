@@ -31,12 +31,18 @@ public:
     virtual void setCredentials(string newUsername, string newPassword) = 0;
 
     // method to get username
-    virtual string getUsername() const = 0;
+     string getUsername() const {
+        return this->username;
+     }
 
     // method to get password
-    virtual string getPassword() const = 0;
+     string getPassword() const {
+        return this->password;
+     }
+
 };
 
+// Derived Class from Admin
 class SubAdmin : public Admin
 {
 public:
@@ -70,20 +76,8 @@ public:
         }
     }
 
-    // method to get username
-    string getUsername() const override
-    {
-        return this->username;
-    };
-
-    // method to get password
-    string getPassword() const override
-    {
-        return this->password;
-    };
 
 };
-
 
 // Derived Class from Admin
 class SuperAdmin : public Admin
@@ -115,18 +109,6 @@ public:
             cout << "Username and Password Not Changed!" << endl;
         }
     }
-
-    // method to get username
-    string getUsername() const 
-    {
-        return this->username;
-    }
-
-    // method to get password
-    string getPassword() const override
-    {
-        return this->password;
-    };
 
     // method to add sub-admin
     void addSubAdmin()
@@ -212,28 +194,54 @@ public:
 };
 
 
-
 class Student
 {
 
 protected:
     string username;
     string password;
-
+    vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Chemical Engineering"};
 public:
     Student(string username, string password)
     {
         this->username = username;
         this->password = password;
     }
-    string getUsername()
-    {
+   // method to get username
+     string getUsername() const {
         return this->username;
-    }
-    string getPassword()
+     }
+    
+    // method to get password
+        string getPassword() const {
+            return this->password;
+        }
+
+    // method to set credentials
+    void setCredentials(string newUsername, string newPassword) 
     {
-        return this->password;
+        cout << "Enter Old Username: ";
+        string oldUsername;
+        cin >> oldUsername;
+        cout << "Enter Old Password: ";
+        string oldPassword;
+        cin >> oldPassword;
+        if (oldUsername == this->username && oldPassword == this->password)
+        {
+            cout << "Enter New Username: ";
+            cin >> newUsername;
+            cout << "Enter New Password: ";
+            cin >> newPassword;
+            this->username = newUsername;
+            this->password = newPassword;
+            cout << "Username and Password Changed Successfully!" << endl;
+        }
+        else
+        {
+            cout << "Username and Password Not Changed!" << endl;
+        }
     }
+
     void setStudent(string username, string password)
     {
         cout << "Enter Old Username: ";
@@ -259,11 +267,17 @@ public:
     }
 };
 
+class CE_Student;
+class EE_Student;
+class ME_Student;
+
 int main()
 {
-    Admin *admin = new SuperAdmin("admin", "admin");
-    string username, password;
     int person;
+    string username, password;
+    Admin *admin = new SuperAdmin("admin", "admin");
+   // Student *student = new Student("student", "student");
+
     cout << "Enter 1 for Admin & 2 for Student Login: ";
     cin >> person;
     switch (person)
@@ -306,7 +320,30 @@ int main()
         }
         break;
     case 2:
-        cout << "Enter Username: ";
+    //     cout << "Enter Username: ";
+    //     cin >> username;
+    //     cout << "Enter Password: ";
+    //     cin >> password;
+    //     if (username == student->getUsername() && password == student->getPassword())
+    //     {
+    //         int choice;
+    //         cout << "1. Change Username & Password" << endl;
+    //         cout << "Enter Choice: ";
+    //         cin >> choice;
+    //         switch (choice)
+    //         {
+    //         case 1:
+    //             student->setStudent(username, password);
+    //             break;
+    //         default:
+    //             break;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         cout << "Invalid Username or Password!" << endl;
+    //     }
+
         break;
 
     default:
