@@ -7,29 +7,27 @@
 
 using namespace std;
 
+// Forward declarations
+class User;
 class Admin;
 class SuperAdmin;
 class SubAdmin;
 class Student;
 
 // Abstract Class
-class Admin
+class User
 {
 protected:
     string username;
     string password;
-    vector<SubAdmin> SubAdmins;
 
 public:
     // constructor
-    Admin(string username, string password)
-    {
-        this->username = username;
-        this->password = password;
-    }
+    User(string username, string password)
+        : username(username), password(password) {}
 
     // virtual destructor will ensure proper destruction of objects of derived classes
-    virtual ~Admin() {}
+    virtual ~User() {}
 
     // pure virtual function
     virtual void setCredentials(string newUsername, string newPassword) = 0;
@@ -47,14 +45,23 @@ public:
     }
 };
 
-// Derived Class from Admin
+// Admin Hierarchy
+class Admin : public User
+{
+public:
+    // constructor
+    Admin(string username, string password)
+        : User(username, password) {}
+
+    // method to set credentials (pure virtual)
+    virtual void setCredentials(string newUsername, string newPassword) = 0;
+};
+
 class SubAdmin : public Admin
 {
 public:
-    SubAdmin(string username, string password) : Admin(username, password)
-    {
-        SubAdmins.push_back(*this);
-    }
+    SubAdmin(string username, string password)
+        : Admin(username, password) {}
 
     // method to set credentials
     void setCredentials(string newUsername, string newPassword) override
@@ -82,11 +89,14 @@ public:
     }
 };
 
-// Derived Class from Admin
 class SuperAdmin : public Admin
 {
+protected:
+    vector<SubAdmin> subAdmins;
+
 public:
-    SuperAdmin(string username, string password) : Admin(username, password) {}
+    SuperAdmin(string username, string password)
+        : Admin(username, password) {}
 
     // method to set credentials
     void setCredentials(string newUsername, string newPassword) override
@@ -130,9 +140,9 @@ public:
             cin >> password;
 
             // checking if sub-admin already exists
-            for (int i = 0; i < SubAdmins.size(); i++)
+            for (int i = 0; i < subAdmins.size(); i++)
             {
-                if (SubAdmins[i].getUsername() == username)
+                if (subAdmins[i].getUsername() == username)
                 {
                     exists = true;
                     cout << "Sub-Admin Already Exists!" << endl;
@@ -142,7 +152,7 @@ public:
         } while (exists);
 
         // adding sub-admin
-        SubAdmins.push_back(SubAdmin(username, password));
+        subAdmins.push_back(SubAdmin(username, password));
         cout << "Sub-Admin Added Successfully!" << endl;
     }
 
@@ -150,9 +160,9 @@ public:
     void viewSubAdmins()
     {
         cout << "Sub-Admins: " << endl;
-        for (int i = 0; i < SubAdmins.size(); i++)
+        for (int i = 0; i < subAdmins.size(); i++)
         {
-            cout << "Username: " << SubAdmins[i].getUsername() << endl;
+            cout << "Username: " << subAdmins[i].getUsername() << endl;
         }
     }
 
@@ -169,9 +179,9 @@ public:
         cin >> username;
 
         // searching for sub-admin
-        for (int i = 0; i < SubAdmins.size(); i++)
+        for (int i = 0; i < subAdmins.size(); i++)
         {
-            if (SubAdmins[i].getUsername() == username)
+            if (subAdmins[i].getUsername() == username)
             {
                 // asking for confirmation
                 cout << "Do you want to delete " << username << " ? (y/n): ";
@@ -180,7 +190,7 @@ public:
                 if (choice == 'y')
                 {
                     // deleting sub-admin
-                    SubAdmins.erase(SubAdmins.begin() + i);
+                    subAdmins.erase(subAdmins.begin() + i);
                     cout << "Sub-Admin Deleted Successfully!" << endl;
                     return;
                 }
@@ -196,34 +206,19 @@ public:
     }
 };
 
-class Student
+// Student Hierarchy
+class Student : public User
 {
 protected:
-    string username;
-    string password;
     vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Chemical Engineering"};
 
 public:
+    // constructor
     Student(string username, string password)
-    {
-        this->username = username;
-        this->password = password;
-    }
-
-    // method to get username
-    string getUsername() const
-    {
-        return this->username;
-    }
-
-    // method to get password
-    string getPassword() const
-    {
-        return this->password;
-    }
+        : User(username, password) {}
 
     // method to set credentials
-    void setCredentials(string newUsername, string newPassword)
+    void setCredentials(string newUsername, string newPassword) override
     {
         cout << "Enter Old Username: ";
         string oldUsername;
@@ -285,7 +280,9 @@ int main()
 {
     int person;
     string username, password;
+
     Admin *admin = new SuperAdmin("admin", "admin");
+    Student *student = new Student("student", "student");
 
     cout << "Enter 1 for Admin & 2 for Student Login: ";
     cin >> person;
@@ -332,7 +329,30 @@ int main()
         break;
 
     case 2:
-        // Code for Student login (not provided in the original code)
+        cout << "Login Time: " << getCurrentTime() << endl;
+        cout << "Enter Username: ";
+        cin >> username;
+        cout << "Enter Password: ";
+        cin >> password;
+        if (username == student->getUsername() && password == student->getPassword())
+        {
+            int choice;
+            cout << "1. Change Username & Password" << endl;
+            cout << "Enter Choice: ";
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                student->setCredentials(username, password);
+                break;
+            default:
+                break;
+            }
+        }
+        else
+        {
+            cout << "Invalid Username or Password!" << endl;
+        }
         break;
 
     default:
@@ -340,6 +360,7 @@ int main()
     }
 
     delete admin;
+    delete student;
 
     cout << "Logout Time: " << getCurrentTime() << endl;
 
