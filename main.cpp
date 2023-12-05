@@ -241,30 +241,6 @@ public:
             cout << "Username and Password Not Changed!" << endl;
         }
     }
-
-    void setStudent(string username, string password)
-    {
-        cout << "Enter Old Username: ";
-        string oldUsername;
-        cin >> oldUsername;
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldUsername == this->username && oldPassword == this->password)
-        {
-            cout << "Enter New Username: ";
-            cin >> username;
-            cout << "Enter New Password: ";
-            cin >> password;
-            this->username = username;
-            this->password = password;
-            cout << "Username and Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Username and Password Not Changed!" << endl;
-        }
-    }
 };
 
 // Function to get current time in HH:MM:SS format
