@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <fstream>
+#include <chrono>
+#include <ctime>
+
 using namespace std;
 
 class Admin;
@@ -24,22 +28,23 @@ public:
         this->password = password;
     }
 
-    // virtal destructor will ensure proper destruction of objects of derived classes
+    // virtual destructor will ensure proper destruction of objects of derived classes
     virtual ~Admin() {}
 
     // pure virtual function
     virtual void setCredentials(string newUsername, string newPassword) = 0;
 
     // method to get username
-     string getUsername() const {
+    string getUsername() const
+    {
         return this->username;
-     }
+    }
 
     // method to get password
-     string getPassword() const {
+    string getPassword() const
+    {
         return this->password;
-     }
-
+    }
 };
 
 // Derived Class from Admin
@@ -75,8 +80,6 @@ public:
             cout << "Username and Password Not Changed!" << endl;
         }
     }
-
-
 };
 
 // Derived Class from Admin
@@ -158,7 +161,7 @@ public:
     {
         string username;
 
-        // displaing all sub-admins
+        // displaying all sub-admins
         viewSubAdmins();
 
         // asking for username to delete
@@ -193,32 +196,34 @@ public:
     }
 };
 
-
 class Student
 {
-
 protected:
     string username;
     string password;
     vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Chemical Engineering"};
+
 public:
     Student(string username, string password)
     {
         this->username = username;
         this->password = password;
     }
-   // method to get username
-     string getUsername() const {
+
+    // method to get username
+    string getUsername() const
+    {
         return this->username;
-     }
-    
+    }
+
     // method to get password
-        string getPassword() const {
-            return this->password;
-        }
+    string getPassword() const
+    {
+        return this->password;
+    }
 
     // method to set credentials
-    void setCredentials(string newUsername, string newPassword) 
+    void setCredentials(string newUsername, string newPassword)
     {
         cout << "Enter Old Username: ";
         string oldUsername;
@@ -267,22 +272,28 @@ public:
     }
 };
 
-class CE_Student;
-class EE_Student;
-class ME_Student;
+// Function to get current time in HH:MM:SS format
+string getCurrentTime()
+{
+    auto now = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", localtime(&now));
+    return buffer;
+}
 
 int main()
 {
     int person;
     string username, password;
     Admin *admin = new SuperAdmin("admin", "admin");
-   // Student *student = new Student("student", "student");
 
     cout << "Enter 1 for Admin & 2 for Student Login: ";
     cin >> person;
+
     switch (person)
     {
     case 1:
+        cout << "Login Time: " << getCurrentTime() << endl;
         cout << "Enter Username: ";
         cin >> username;
         cout << "Enter Password: ";
@@ -319,31 +330,9 @@ int main()
             cout << "Invalid Username or Password!" << endl;
         }
         break;
-    case 2:
-    //     cout << "Enter Username: ";
-    //     cin >> username;
-    //     cout << "Enter Password: ";
-    //     cin >> password;
-    //     if (username == student->getUsername() && password == student->getPassword())
-    //     {
-    //         int choice;
-    //         cout << "1. Change Username & Password" << endl;
-    //         cout << "Enter Choice: ";
-    //         cin >> choice;
-    //         switch (choice)
-    //         {
-    //         case 1:
-    //             student->setStudent(username, password);
-    //             break;
-    //         default:
-    //             break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         cout << "Invalid Username or Password!" << endl;
-    //     }
 
+    case 2:
+        // Code for Student login (not provided in the original code)
         break;
 
     default:
@@ -351,6 +340,8 @@ int main()
     }
 
     delete admin;
+
+    cout << "Logout Time: " << getCurrentTime() << endl;
 
     return 0;
 }
