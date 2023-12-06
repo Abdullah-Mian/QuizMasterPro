@@ -9,6 +9,7 @@ class Admin;
 class SuperAdmin;
 class Student;
 
+// Abstract Class
 class User
 {
 protected:
@@ -225,57 +226,17 @@ public:
         return this->password;
     }
 
-    // method to set credentials
-    void setCredentials(string newUsername, string newPassword)
-    {
-        cout << "Enter Old Username: ";
-        string oldUsername;
-        cin >> oldUsername;
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldUsername == this->username && oldPassword == this->password)
-        {
-            cout << "Enter New Username: ";
-            cin >> newUsername;
-            cout << "Enter New Password: ";
-            cin >> newPassword;
-            this->username = newUsername;
-            this->password = newPassword;
-            cout << "Username and Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Username and Password Not Changed!" << endl;
-        }
-    }
+};
 
-    void setStudent(string username, string password)
+class CS_Student : public Student
+{
+public:
+    CS_Student(string username, string password) : Student(username, password)
     {
-        cout << "Enter Old Username: ";
-        string oldUsername;
-        cin >> oldUsername;
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldUsername == this->username && oldPassword == this->password)
-        {
-            cout << "Enter New Username: ";
-            cin >> username;
-            cout << "Enter New Password: ";
-            cin >> password;
-            this->username = username;
-            this->password = password;
-            cout << "Username and Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Username and Password Not Changed!" << endl;
-        }
     }
 };
 
-class CE_Student;
+
 class EE_Student;
 class ME_Student;
 
