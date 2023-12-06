@@ -3,6 +3,7 @@
 #include <fstream>
 using namespace std;
 
+// forword declaration of classes
 class User;
 class SubAdmin;
 class Admin;
