@@ -293,6 +293,12 @@ int main()
 
     cout << "Enter 1 for Admin & 2 for Student Login: ";
     cin >> person;
+     // Clear screen and print message
+#ifdef _WIN32
+                system("cls");
+#elif defined(__linux__)
+                system("clear");
+#endif
     switch (person)
     {
     case 1:
