@@ -261,7 +261,6 @@ public:
     }
 };
 
-
 class SE_Student : public Student
 {
 private:
@@ -283,12 +282,6 @@ public:
         // Display overall progress
     }
 };
-
-
-
-
-
-
 
 int main()
 {
@@ -332,8 +325,15 @@ int main()
                 ((SuperAdmin *)admin)->deleteSubAdmin();
                 break;
             case 5:
-                cout<<"Program exits!"<<endl;
+                // Clear screen and print message
+#ifdef _WIN32
+                system("cls");
+#elif defined(__linux__)
+                system("clear");
+#endif
+                cout << "Program exited!" << endl;
                 return 0;
+
             default:
                 break;
             }
