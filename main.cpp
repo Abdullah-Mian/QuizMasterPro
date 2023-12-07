@@ -226,17 +226,69 @@ private:
 public:
     CS_Student(string password, string registration)
         : Student(password, registration) {}
-        
+
     // method to display courses
-    void displayCourses() const override{
-        //Display list of courses
+    void displayCourses() const override
+    {
+        // Display list of courses
     }
-    
-    void displayOverallProgress() const override{
-        //Display overall progress
-        
+
+    void displayOverallProgress() const override
+    {
+        // Display overall progress
     }
 };
+
+class EE_Student : public Student
+{
+private:
+    string degreeprogram = degree_programs[1];
+    list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
+
+public:
+    EE_Student(string password, string registration)
+        : Student(password, registration) {}
+
+    // method to display courses
+    void displayCourses() const override
+    {
+        // Display list of courses
+    }
+
+    void displayOverallProgress() const override
+    {
+        // Display overall progress
+    }
+};
+
+
+class SE_Student : public Student
+{
+private:
+    string degreeprogram = degree_programs[1];
+    list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
+
+public:
+    SE_Student(string password, string registration)
+        : Student(password, registration) {}
+
+    // method to display courses
+    void displayCourses() const override
+    {
+        // Display list of courses
+    }
+
+    void displayOverallProgress() const override
+    {
+        // Display overall progress
+    }
+};
+
+
+
+
+
+
 
 int main()
 {
@@ -257,7 +309,7 @@ int main()
         cin >> password;
         if (username == admin->getUsername() && password == admin->getPassword())
         {
-            
+
             cout << "1. Change Username & Password" << endl;
             cout << "2. Add Sub-Admin" << endl;
             cout << "3. View Sub-Admins" << endl;
@@ -280,7 +332,8 @@ int main()
                 ((SuperAdmin *)admin)->deleteSubAdmin();
                 break;
             case 5:
-               return 0;
+                cout<<"Program exits!"<<endl;
+                return 0;
             default:
                 break;
             }
@@ -297,7 +350,7 @@ int main()
         cin >> password;
         if (username == student->getUsername() && password == student->getPassword())
         {
-            
+
             cout << "1. Change Username & Password" << endl;
             cout << "Enter Choice: ";
             cin >> choice;
@@ -318,27 +371,24 @@ int main()
         cout << "Enter\n\t(1-Go To Dashboard, \n2-Overall Progress): ";
         cout << "\n3-Change Password\n";
 
-        
-        cout<<"\nEnter Choice: \n";
+        cout << "\nEnter Choice: \n";
         cin >> choice;
 
         switch (choice)
         {
-            case 1:
-                //student.displaycourses();
-                break;
-            case 2:
-                //2 methods
-                //displayoverallprogress();
-                //displaycourses();
-                break;
-            case 3:
-                break;
-            default:
-                break;
+        case 1:
+            // student.displaycourses();
+            break;
+        case 2:
+            // 2 methods
+            // displayoverallprogress();
+            // displaycourses();
+            break;
+        case 3:
+            break;
+        default:
+            break;
         }
-
-
 
         break;
 
