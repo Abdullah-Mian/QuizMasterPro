@@ -2,7 +2,42 @@
 #include <vector>
 #include <fstream>
 #include <list>
+
+#ifdef _WIN32
+    #include <windows.h>
+#elif __linux__
+    #include <ncurses.h>
+#endif
+
 using namespace std;
+
+//Console FullScreen Function
+void setConsoleFullScreen() {
+#ifdef _WIN32
+    HWND console = GetConsoleWindow();
+    ShowWindow(console, SW_MAXIMIZE); // Maximize the console window
+#elif __linux__
+    initscr(); // initialize the library
+    raw(); // disable line buffering
+    keypad(stdscr, TRUE); // enable special keys
+
+    if (has_colors()) {
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_BLACK);
+        attron(COLOR_PAIR(1));
+    }
+
+    clear(); // clear the screen
+    refresh(); // refresh the screen
+#endif
+}
+
+void cleanup() {
+#ifdef __linux__
+    endwin(); // clean up and restore terminal settings
+#endif
+}
+
 
 // Forward Declarations
 class User;
@@ -353,6 +388,7 @@ public:
 
 int main()
 {
+    setConsoleFullScreen();
     int person;
     int choice;
     string username, password, registration;
@@ -408,6 +444,7 @@ int main()
                         system("clear");
                     #endif
                     cout << "Program exited!" << endl;
+                    cleanup();//To restore console to normal state
                     return 0;
 
                 default:
@@ -453,6 +490,9 @@ int main()
 
     delete admin;
     delete student;
+
+
+    cleanup();//To restore console to normal state
 
     return 0;
 }
