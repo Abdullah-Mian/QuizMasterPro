@@ -370,7 +370,6 @@ int main()
             system("clear");
         #endif
 
-       do {
          switch (person)
         {
         case 1:
@@ -450,7 +449,6 @@ int main()
         default:
             break;
         }
-       } while(true);
     } while (true);
 
     delete admin;
