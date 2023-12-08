@@ -23,7 +23,7 @@ public:
     // constructor
     Admin(string username, string password) : username(username), password(password) {}
 
-    // virtal destructor will ensure proper destruction of objects of derived classes
+    // virtual destructor will ensure proper destruction of objects of derived classes
     virtual ~Admin() {}
 
     // pure virtual methods
@@ -151,7 +151,7 @@ public:
     {
         string username;
 
-        // displaing all sub-admins
+        // displaying all sub-admins
         viewSubAdmins();
 
         // asking for username to delete
@@ -311,7 +311,7 @@ private:
     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
 public:
-    // construcotr
+    // Constructor
     CE_Student(string password, string registration)
         : Student(password, registration) {}
 
@@ -327,7 +327,7 @@ public:
     }
 };
 
-// Che_student class
+// CHE_student class
 class CHE_Student : public Student
 {
 private:
