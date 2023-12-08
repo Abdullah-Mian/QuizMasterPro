@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include <list>
 using namespace std;
 
+// Forward Declarations
 class User;
 class SubAdmin;
 class Admin;
@@ -10,20 +12,26 @@ class SuperAdmin;
 class Student;
 
 // Abstract Class
-class User
+class Admin
 {
 protected:
     string username;
     string password;
+    vector<SubAdmin> SubAdminsVector;
 
 public:
     // constructor
-    User(string username, string password) : username(username), password(password) {}
+    Admin(string username, string password) : username(username), password(password) {}
 
-    // virtual destructor will ensure proper destruction of objects of derived classes
-    virtual ~User() {}
+    // virtal destructor will ensure proper destruction of objects of derived classes
+    virtual ~Admin() {}
 
-    // pure virtual function
+    // pure virtual methods
+    virtual void addSubAdmin() = 0;         // method to add sub-admin
+    virtual void deleteSubAdmin() = 0;      // method to delete sub-admin
+    virtual void viewSubAdmins() const = 0; // method to view sub-admins
+
+    // method to set credentials
     virtual void setCredentials(string newUsername, string newPassword)
     {
         cout << "Enter Old Username: ";
@@ -61,25 +69,7 @@ public:
     }
 };
 
-// Abstract Class
-class Admin : public User
-{
-protected:
-    vector<SubAdmin> SubAdminsVector;
-
-public:
-    // constructor
-    Admin(string username, string password) : User(username, password) {}
-
-    // virtual destructor will ensure proper destruction of objects of derived classes
-    virtual ~Admin() {}
-
-    virtual void addSubAdmin() = 0;
-    virtual void deleteSubAdmin() = 0;
-    virtual void viewSubAdmins() const = 0;
-};
-
-// Derived Class from Admin
+// SubAdmin class with authority only over Student
 class SubAdmin : public Admin
 {
 public:
@@ -107,7 +97,7 @@ public:
     }
 };
 
-// Derived Class from Admin
+// SuperAdmin class having authority to add, delete and view sub-admins
 class SuperAdmin : public Admin
 {
 public:
@@ -196,16 +186,17 @@ public:
     }
 };
 
-class Student : public User
+// Abstract Student class
+class Student
 {
 
 protected:
     string registration;
+    string password;
     vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Software Engineering", "Computer Engineering", "Chemical Engineering"};
 
 public:
-    Student(string password, string registration)
-        : User("", password), registration(registration) {}
+    Student(string password, string registration) : password(password), registration(registration) {}
 
     // method to get registration
     string getRegistration() const
@@ -213,10 +204,37 @@ public:
         return this->registration;
     }
 
-    virtual void displayCourses() const = 0;
-    virtual void displayOverallProgress() const = 0;
+    // pure virtual methods
+    virtual void displayCourses() const = 0;         // method to display courses
+    virtual void displayOverallProgress() const = 0; // method to display overall progress
+
+    // method to set credentials
+    virtual void setCredentials(string newPassword)
+    {
+        cout << "Enter Old Password: ";
+        string oldPassword;
+        cin >> oldPassword;
+        if (oldPassword == this->password)
+        {
+            cout << "Enter New Password: ";
+            cin >> newPassword;
+            this->password = newPassword;
+            cout << "Password Changed Successfully!" << endl;
+        }
+        else
+        {
+            cout << "Password Not Changed!" << endl;
+        }
+    }
+
+    // method to get password
+    string getPassword() const
+    {
+        return this->password;
+    }
 };
 
+// CS_student class
 class CS_Student : public Student
 {
 private:
@@ -239,6 +257,7 @@ public:
     }
 };
 
+// EE_student class
 class EE_Student : public Student
 {
 private:
@@ -261,6 +280,7 @@ public:
     }
 };
 
+// SE_student class
 class SE_Student : public Student
 {
 private:
@@ -283,6 +303,54 @@ public:
     }
 };
 
+// CE_student class
+class CE_Student : public Student
+{
+private:
+    string degreeprogram = degree_programs[1];
+    list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
+
+public:
+    // construcotr
+    CE_Student(string password, string registration)
+        : Student(password, registration) {}
+
+    // method to display courses
+    void displayCourses() const override
+    {
+        // Display list of courses
+    }
+
+    void displayOverallProgress() const override
+    {
+        // Display overall progress
+    }
+};
+
+// Che_student class
+class CHE_Student : public Student
+{
+private:
+    string degreeprogram = degree_programs[1];
+    list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
+
+public:
+    // construcotr
+    CHE_Student(string password, string registration)
+        : Student(password, registration) {}
+
+    // method to display courses
+    void displayCourses() const override
+    {
+        // Display list of courses
+    }
+
+    void displayOverallProgress() const override
+    {
+        // Display overall progress
+    }
+};
+
 int main()
 {
     int person;
@@ -291,116 +359,99 @@ int main()
     Admin *admin = new SuperAdmin("admin", "admin");
     Student *student = new CS_Student("student", "CS123");
 
-    cout << "Enter 1 for Admin & 2 for Student Login: ";
-    cin >> person;
-     // Clear screen and print message
-#ifdef _WIN32
-                system("cls");
-#elif defined(__linux__)
-                system("clear");
-#endif
-    switch (person)
+    do
     {
-    case 1:
-        cout << "Enter Username: ";
-        cin >> username;
-        cout << "Enter Password: ";
-        cin >> password;
-        if (username == admin->getUsername() && password == admin->getPassword())
-        {
+        cout << "Enter 1 for Admin & 2 for Student Login: ";
+        cin >> person;
+        // Clear screen and print message
+        #ifdef _WIN32
+            system("cls");
+        #elif defined(__linux__)
+            system("clear");
+        #endif
 
-            cout << "1. Change Username & Password" << endl;
-            cout << "2. Add Sub-Admin" << endl;
-            cout << "3. View Sub-Admins" << endl;
-            cout << "4. Delete Sub-Admin" << endl;
-            cout << "5. Exit" << endl;
-            cout << "Enter Choice: ";
-            cin >> choice;
-            switch (choice)
-            {
-            case 1:
-                admin->setCredentials(username, password);
-                break;
-            case 2:
-                ((SuperAdmin *)admin)->addSubAdmin();
-                break;
-            case 3:
-                ((SuperAdmin *)admin)->viewSubAdmins();
-                break;
-            case 4:
-                ((SuperAdmin *)admin)->deleteSubAdmin();
-                break;
-            case 5:
-                // Clear screen and print message
-#ifdef _WIN32
-                system("cls");
-#elif defined(__linux__)
-                system("clear");
-#endif
-                cout << "Program exited!" << endl;
-                return 0;
-
-            default:
-                break;
-            }
-        }
-        else
-        {
-            cout << "Invalid Username or Password!" << endl;
-        }
-        break;
-    case 2:
-        cout << "Enter Username: ";
-        cin >> username;
-        cout << "Enter Password: ";
-        cin >> password;
-        if (username == student->getUsername() && password == student->getPassword())
-        {
-
-            cout << "1. Change Username & Password" << endl;
-            cout << "Enter Choice: ";
-            cin >> choice;
-            switch (choice)
-            {
-            case 1:
-                student->setCredentials(username, password);
-                break;
-            default:
-                break;
-            }
-        }
-        else
-        {
-            cout << "Invalid Username or Password!" << endl;
-        }
-
-        cout << "Enter\n\t(1-Go To Dashboard, \n2-Overall Progress): ";
-        cout << "\n3-Change Password\n";
-
-        cout << "\nEnter Choice: \n";
-        cin >> choice;
-
-        switch (choice)
+       do {
+         switch (person)
         {
         case 1:
-            // student.displaycourses();
+            cout << "Enter Username: ";
+            cin >> username;
+            cout << "Enter Password: ";
+            cin >> password;
+            if (username == admin->getUsername() && password == admin->getPassword())
+            {
+                cout << "1. Change Username & Password" << endl;
+                cout << "2. Add Sub-Admin" << endl;
+                cout << "3. View Sub-Admins" << endl;
+                cout << "4. Delete Sub-Admin" << endl;
+                cout << "5. Exit" << endl;
+                cout << "Enter Choice: ";
+                cin >> choice;
+                switch (choice)
+                {
+                case 1:
+                    admin->setCredentials(username, password);
+                    break;
+                case 2:
+                    ((SuperAdmin *)admin)->addSubAdmin();
+                    break;
+                case 3:
+                    ((SuperAdmin *)admin)->viewSubAdmins();
+                    break;
+                case 4:
+                    ((SuperAdmin *)admin)->deleteSubAdmin();
+                    break;
+                case 5:
+                    // Clear screen and print message
+                    #ifdef _WIN32
+                        system("cls");
+                    #elif defined(__linux__)
+                        system("clear");
+                    #endif
+                    cout << "Program exited!" << endl;
+                    return 0;
+
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                cout << "Invalid Username or Password!" << endl;
+            }
             break;
         case 2:
-            // 2 methods
-            // displayoverallprogress();
-            // displaycourses();
+
+            cout << "\n1-Go To Dashboard"
+                 << "\n2-Overall Progress):"
+                 << "\n3-Change Password";
+
+            cout << "\nEnter Choice:";
+            cin >> choice;
+
+            switch (choice)
+            {
+            case 1:
+                // student.displaycourses();
+                break;
+            case 2:
+                // 2 methods
+                // displayoverallprogress();
+                // displaycourses();
+                break;
+            case 3:
+                break;
+            default:
+                break;
+            }
+
             break;
-        case 3:
-            break;
+
         default:
             break;
         }
-
-        break;
-
-    default:
-        break;
-    }
+       } while(true);
+    } while (true);
 
     delete admin;
     delete student;
