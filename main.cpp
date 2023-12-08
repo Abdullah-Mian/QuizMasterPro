@@ -422,7 +422,7 @@ int main()
         case 2:
 
             cout << "\n1-Go To Dashboard"
-                 << "\n2-Overall Progress):"
+                 << "\n2-Overall Progress"
                  << "\n3-Change Password";
 
             cout << "\nEnter Choice:";
