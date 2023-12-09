@@ -3,6 +3,9 @@
 #include <fstream>
 #include <list>
 
+#include"Admin.h"
+#include"SubAdmin.h"
+
 // Check if the operating system is Windows to use the sleep function
 #ifdef _WIN32
 #include <windows.h>
@@ -62,92 +65,6 @@ class SubAdmin;
 class Admin;
 class SuperAdmin;
 class Student;
-
-// Abstract Class
-class Admin
-{
-protected:
-    string username;
-    string password;
-    vector<SubAdmin> SubAdminsVector;
-
-public:
-    // constructor
-    Admin(string username, string password) : username(username), password(password) {}
-
-    // virtual destructor will ensure proper destruction of objects of derived classes
-    virtual ~Admin() {}
-
-    // pure virtual methods
-    virtual void addSubAdmin() = 0;         // method to add sub-admin
-    virtual void deleteSubAdmin() = 0;      // method to delete sub-admin
-    virtual void viewSubAdmins() const = 0; // method to view sub-admins
-
-    // method to set credentials
-    virtual void setCredentials(string newUsername, string newPassword)
-    {
-        cout << "Enter Old Username: ";
-        string oldUsername;
-        cin >> oldUsername;
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldUsername == this->username && oldPassword == this->password)
-        {
-            cout << "Enter New Username: ";
-            cin >> newUsername;
-            cout << "Enter New Password: ";
-            cin >> newPassword;
-            this->username = newUsername;
-            this->password = newPassword;
-            cout << "Username and Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Username and Password Not Changed!" << endl;
-        }
-    }
-
-    // method to get username
-    string getUsername() const
-    {
-        return this->username;
-    }
-
-    // method to get password
-    string getPassword() const
-    {
-        return this->password;
-    }
-};
-
-// SubAdmin class with authority only over Student
-class SubAdmin : public Admin
-{
-public:
-    SubAdmin(string username, string password) : Admin(username, password)
-    {
-        SubAdminsVector.push_back(*this);
-    }
-
-    // method to view sub-admins
-    void viewSubAdmins() const override
-    {
-        cout << "You are not a super-Admin" << endl;
-    };
-
-    // method to add sub-admin
-    void addSubAdmin() override
-    {
-        cout << "You are not a super-Admin" << endl;
-    }
-
-    // method to delete sub-admin
-    void deleteSubAdmin() override
-    {
-        cout << "You are not a super-Admin" << endl;
-    }
-};
 
 // SuperAdmin class having authority to add, delete and view sub-admins
 class SuperAdmin : public Admin
