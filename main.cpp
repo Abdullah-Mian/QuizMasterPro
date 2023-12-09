@@ -23,32 +23,6 @@
 */
 using namespace std;
 
-/*//Console FullScreen Function
-void setConsoleFullScreen() {
-#ifdef _WIN32
-    HWND console = GetConsoleWindow();
-    ShowWindow(console, SW_MAXIMIZE); // Maximize the console window
-#elif __linux__
-    initscr(); // initialize the library
-    raw(); // disable line buffering
-    keypad(stdscr, TRUE); // enable special keys
-
-    if (has_colors()) {
-        start_color();
-        init_pair(1, COLOR_WHITE, COLOR_BLACK);
-        attron(COLOR_PAIR(1));
-    }
-
-    clear(); // clear the screen
-    refresh(); // refresh the screen
-#endif
-}
-
-void cleanup() {
-#ifdef __linux__
-    endwin(); // clean up and restore terminal settings
-#endif
-}*/
 
 // Function to introduce a delay using sleep
 void mySleep(int seconds)
@@ -174,7 +148,6 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     system("clear");
 #endif
                     cout << "Program exited!" << endl;
-                    // cleanup();//To restore console to normal state
                     return 0;
 
                 default:
@@ -220,8 +193,6 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
     delete admin;
     delete student;
-
-    // cleanup();//To restore console to normal state
 
     return 0;
 }
