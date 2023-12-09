@@ -1,11 +1,7 @@
 #include "Student.h"
 
 // Constructor for Student
-Student::Student(string password, string registration) : password(password), registration(registration)
-{
-    // Initialize degree programs
-    degree_programs = {"Computer Science", "Electrical Engineering", "Software Engineering", "Computer Engineering", "Chemical Engineering"};
-}
+Student::Student(string password, string registration, string degProgram) : password(password), registration(registration), degreeProgram(degProgram) {}
 
 // Method to get registration
 string Student::getRegistration() const

@@ -7,8 +7,6 @@
 #include"SubAdmin.h"
 #include"SuperAdmin.h"
 #include"Student.h"
-#include"CS_Student.h"
-
 // Check if the operating system is Windows to use the sleep function
 #ifdef _WIN32
 #include <windows.h>
@@ -69,122 +67,16 @@ class Admin;
 class SuperAdmin;
 class Student;
 
-// CS_student class
-// class CS_Student : public Student
-// {
-// private:
-//     string degreeprogram = degree_programs[0];
 //     list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
 
-// public:
-//     CS_Student(string password, string registration)
-//         : Student(password, registration) {}
+//     list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
 
-//     // method to display courses
-//     void displayCourses() const override
-//     {
-//         // Display list of courses
-//     }
+//     list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
 
-//     void displayOverallProgress() const override
-//     {
-//         // Display overall progress
-//     }
-// };
+//     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
-// EE_student class
-class EE_Student : public Student
-{
-private:
-    string degreeprogram = degree_programs[1];
-    list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
+//     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
-public:
-    EE_Student(string password, string registration)
-        : Student(password, registration) {}
-
-    // method to display courses
-    void displayCourses() const override
-    {
-        // Display list of courses
-    }
-
-    void displayOverallProgress() const override
-    {
-        // Display overall progress
-    }
-};
-
-// SE_student class
-class SE_Student : public Student
-{
-private:
-    string degreeprogram = degree_programs[1];
-    list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
-
-public:
-    SE_Student(string password, string registration)
-        : Student(password, registration) {}
-
-    // method to display courses
-    void displayCourses() const override
-    {
-        // Display list of courses
-    }
-
-    void displayOverallProgress() const override
-    {
-        // Display overall progress
-    }
-};
-
-// CE_student class
-class CE_Student : public Student
-{
-private:
-    string degreeprogram = degree_programs[1];
-    list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
-
-public:
-    // Constructor
-    CE_Student(string password, string registration)
-        : Student(password, registration) {}
-
-    // method to display courses
-    void displayCourses() const override
-    {
-        // Display list of courses
-    }
-
-    void displayOverallProgress() const override
-    {
-        // Display overall progress
-    }
-};
-
-// CHE_student class
-class CHE_Student : public Student
-{
-private:
-    string degreeprogram = degree_programs[1];
-    list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
-
-public:
-    // constructor
-    CHE_Student(string password, string registration)
-        : Student(password, registration) {}
-
-    // method to display courses
-    void displayCourses() const override
-    {
-        // Display list of courses
-    }
-
-    void displayOverallProgress() const override
-    {
-        // Display overall progress
-    }
-};
 
 int main()
 {
@@ -231,7 +123,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     int choice;
     string username, password, registration;
     Admin *admin = new SuperAdmin("admin", "admin");
-    Student *student = new CS_Student("student", "CS123");
+    Student *student = new Student("student", "CS123", "CS");
 
     do
     {
