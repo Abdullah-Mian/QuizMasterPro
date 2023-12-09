@@ -6,6 +6,8 @@
 #include"Admin.h"
 #include"SubAdmin.h"
 #include"SuperAdmin.h"
+#include"Student.h"
+#include"CS_Student.h"
 
 // Check if the operating system is Windows to use the sleep function
 #ifdef _WIN32
@@ -67,76 +69,28 @@ class Admin;
 class SuperAdmin;
 class Student;
 
-// Abstract Student class
-class Student
-{
-
-protected:
-    string registration;
-    string password;
-    vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Software Engineering", "Computer Engineering", "Chemical Engineering"};
-
-public:
-    Student(string password, string registration) : password(password), registration(registration) {}
-
-    // method to get registration
-    string getRegistration() const
-    {
-        return this->registration;
-    }
-
-    // pure virtual methods
-    virtual void displayCourses() const = 0;         // method to display courses
-    virtual void displayOverallProgress() const = 0; // method to display overall progress
-
-    // method to set credentials
-    virtual void setCredentials(string newPassword)
-    {
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldPassword == this->password)
-        {
-            cout << "Enter New Password: ";
-            cin >> newPassword;
-            this->password = newPassword;
-            cout << "Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Password Not Changed!" << endl;
-        }
-    }
-
-    // method to get password
-    string getPassword() const
-    {
-        return this->password;
-    }
-};
-
 // CS_student class
-class CS_Student : public Student
-{
-private:
-    string degreeprogram = degree_programs[0];
-    list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
+// class CS_Student : public Student
+// {
+// private:
+//     string degreeprogram = degree_programs[0];
+//     list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
 
-public:
-    CS_Student(string password, string registration)
-        : Student(password, registration) {}
+// public:
+//     CS_Student(string password, string registration)
+//         : Student(password, registration) {}
 
-    // method to display courses
-    void displayCourses() const override
-    {
-        // Display list of courses
-    }
+//     // method to display courses
+//     void displayCourses() const override
+//     {
+//         // Display list of courses
+//     }
 
-    void displayOverallProgress() const override
-    {
-        // Display overall progress
-    }
-};
+//     void displayOverallProgress() const override
+//     {
+//         // Display overall progress
+//     }
+// };
 
 // EE_student class
 class EE_Student : public Student

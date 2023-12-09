@@ -1,3 +1,4 @@
+// SUPERADMIN_H
 #ifndef SUPERADMIN_H
 #define SUPERADMIN_H
 
@@ -6,8 +7,10 @@
 class SuperAdmin : public Admin
 {
 public:
+    // Constructor for SuperAdmin
     SuperAdmin(string username, string password);
 
+    // Overrides from the base class Admin
     void addSubAdmin() override;
     void viewSubAdmins() const override;
     void deleteSubAdmin() override;

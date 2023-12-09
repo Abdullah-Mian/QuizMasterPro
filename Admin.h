@@ -7,8 +7,10 @@
 
 using namespace std;
 
+// Forward declaration of SubAdmin class to avoid circular dependency
 class SubAdmin;
 
+// Base class for Admin
 class Admin
 {
 protected:
@@ -17,16 +19,24 @@ protected:
     vector<SubAdmin> SubAdminsVector;
 
 public:
+    // Constructor for Admin
     Admin(string username, string password);
+
+    // Virtual destructor for proper destruction of derived classes
     virtual ~Admin();
 
+    // Pure virtual functions to be implemented by derived classes
     virtual void addSubAdmin() = 0;
     virtual void deleteSubAdmin() = 0;
     virtual void viewSubAdmins() const = 0;
 
+    // Virtual function for setting credentials
     virtual void setCredentials(string newUsername, string newPassword);
 
+    // Method to get username
     string getUsername() const;
+
+    // Method to get password
     string getPassword() const;
 };
 
