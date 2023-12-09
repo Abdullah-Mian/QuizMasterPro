@@ -5,6 +5,7 @@
 
 #include"Admin.h"
 #include"SubAdmin.h"
+#include"SuperAdmin.h"
 
 // Check if the operating system is Windows to use the sleep function
 #ifdef _WIN32
@@ -65,95 +66,6 @@ class SubAdmin;
 class Admin;
 class SuperAdmin;
 class Student;
-
-// SuperAdmin class having authority to add, delete and view sub-admins
-class SuperAdmin : public Admin
-{
-public:
-    SuperAdmin(string username, string password) : Admin(username, password) {}
-
-    // method to add sub-admin
-    void addSubAdmin() override
-    {
-        string username, password;
-        bool exists = false;
-
-        do
-        {
-            exists = false; // flag to check if sub-admin already exists
-
-            // asking for username and password
-            cout << "Enter Username: ";
-            cin >> username;
-            cout << "Enter Password: ";
-            cin >> password;
-
-            // checking if sub-admin already exists
-            for (int i = 0; i < SubAdminsVector.size(); i++)
-            {
-                if (SubAdminsVector[i].getUsername() == username)
-                {
-                    exists = true;
-                    cout << "Sub-Admin Already Exists!" << endl;
-                    return;
-                }
-            }
-        } while (exists);
-
-        // adding sub-admin
-        SubAdminsVector.push_back(SubAdmin(username, password));
-        cout << "Sub-Admin Added Successfully!" << endl;
-    }
-
-    // method to view sub-admins
-    void viewSubAdmins() const override
-    {
-        cout << "Sub-Admins: " << endl;
-        for (int i = 0; i < SubAdminsVector.size(); i++)
-        {
-            cout << "Username: " << SubAdminsVector[i].getUsername() << endl;
-        }
-    };
-
-    // method to delete sub-admin
-    void deleteSubAdmin() override
-    {
-        string username;
-
-        // displaying all sub-admins
-        viewSubAdmins();
-
-        // asking for username to delete
-        cout << "Enter Username: ";
-        cin >> username;
-
-        // searching for sub-admin
-        for (int i = 0; i < SubAdminsVector.size(); i++)
-        {
-            if (SubAdminsVector[i].getUsername() == username)
-            {
-                // asking for confirmation
-                cout << "Do you want to delete " << username << " ? (y/n): ";
-                char choice;
-                cin >> choice;
-                if (choice == 'y')
-                {
-                    // deleting sub-admin
-                    SubAdminsVector.erase(SubAdminsVector.begin() + i);
-                    cout << "Sub-Admin Deleted Successfully!" << endl;
-                    return;
-                }
-                else
-                {
-                    cout << "Sub-Admin Not Deleted!" << endl;
-                    return;
-                }
-                return;
-            }
-        }
-        cout << "Sub-Admin Not Found!" << endl;
-    }
-};
 
 // Abstract Student class
 class Student
