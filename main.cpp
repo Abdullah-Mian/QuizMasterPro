@@ -13,14 +13,7 @@
 #else
 #include <unistd.h>
 #endif
-/*
-//OS-Independent Includes for Full Screen
-#ifdef _WIN32
-    #include <windows.h>
-#elif __linux__
-    #include <ncurses.h>
-#endif
-*/
+
 using namespace std;
 
 
@@ -54,7 +47,6 @@ class Student;
 
 int main()
 {
-    // setConsoleFullScreen();
     // Clear screen and print message
 #ifdef _WIN32
     system("cls");
