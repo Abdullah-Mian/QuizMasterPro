@@ -2,7 +2,59 @@
 #include <vector>
 #include <fstream>
 #include <list>
+
+// Check if the operating system is Windows to use the sleep function
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+/*
+//OS-Independent Includes for Full Screen
+#ifdef _WIN32
+    #include <windows.h>
+#elif __linux__
+    #include <ncurses.h>
+#endif
+*/
 using namespace std;
+
+/*//Console FullScreen Function
+void setConsoleFullScreen() {
+#ifdef _WIN32
+    HWND console = GetConsoleWindow();
+    ShowWindow(console, SW_MAXIMIZE); // Maximize the console window
+#elif __linux__
+    initscr(); // initialize the library
+    raw(); // disable line buffering
+    keypad(stdscr, TRUE); // enable special keys
+
+    if (has_colors()) {
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_BLACK);
+        attron(COLOR_PAIR(1));
+    }
+
+    clear(); // clear the screen
+    refresh(); // refresh the screen
+#endif
+}
+
+void cleanup() {
+#ifdef __linux__
+    endwin(); // clean up and restore terminal settings
+#endif
+}*/
+
+// Function to introduce a delay using sleep
+void mySleep(int seconds)
+{
+#ifdef _WIN32
+    Sleep(seconds * 1000); // Sleep takes milliseconds on Windows
+#else
+    sleep(seconds); // Sleep takes seconds on Unix-based systems
+#endif
+}
 
 // Forward Declarations
 class User;
@@ -23,7 +75,7 @@ public:
     // constructor
     Admin(string username, string password) : username(username), password(password) {}
 
-    // virtal destructor will ensure proper destruction of objects of derived classes
+    // virtual destructor will ensure proper destruction of objects of derived classes
     virtual ~Admin() {}
 
     // pure virtual methods
@@ -151,7 +203,7 @@ public:
     {
         string username;
 
-        // displaing all sub-admins
+        // displaying all sub-admins
         viewSubAdmins();
 
         // asking for username to delete
@@ -311,7 +363,7 @@ private:
     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
 public:
-    // construcotr
+    // Constructor
     CE_Student(string password, string registration)
         : Student(password, registration) {}
 
@@ -327,7 +379,7 @@ public:
     }
 };
 
-// Che_student class
+// CHE_student class
 class CHE_Student : public Student
 {
 private:
@@ -335,7 +387,7 @@ private:
     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
 public:
-    // construcotr
+    // constructor
     CHE_Student(string password, string registration)
         : Student(password, registration) {}
 
@@ -353,6 +405,45 @@ public:
 
 int main()
 {
+    // setConsoleFullScreen();
+    // Clear screen and print message
+#ifdef _WIN32
+    system("cls");
+#elif defined(__linux__)
+    system("clear");
+#endif
+
+    cout << "Program is starting..." << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        mySleep(1);
+
+        cout << "=";
+        cout.flush();
+    }
+    // Clear screen and print message
+#ifdef _WIN32
+    system("cls");
+#elif defined(__linux__)
+    system("clear");
+#endif
+
+    cout << R"(
+____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
+|  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
+|_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
+                                                             
+)" << endl;
+
+    mySleep(1);
+
+// Clear screen and print message
+#ifdef _WIN32
+    system("cls");
+#elif defined(__linux__)
+    system("clear");
+#endif
+
     int person;
     int choice;
     string username, password, registration;
@@ -363,14 +454,14 @@ int main()
     {
         cout << "Enter 1 for Admin & 2 for Student Login: ";
         cin >> person;
-        // Clear screen and print message
-        #ifdef _WIN32
-            system("cls");
-        #elif defined(__linux__)
-            system("clear");
-        #endif
+// Clear screen and print message
+#ifdef _WIN32
+        system("cls");
+#elif defined(__linux__)
+        system("clear");
+#endif
 
-         switch (person)
+        switch (person)
         {
         case 1:
             cout << "Enter Username: ";
@@ -402,12 +493,13 @@ int main()
                     break;
                 case 5:
                     // Clear screen and print message
-                    #ifdef _WIN32
-                        system("cls");
-                    #elif defined(__linux__)
-                        system("clear");
-                    #endif
+#ifdef _WIN32
+                    system("cls");
+#elif defined(__linux__)
+                    system("clear");
+#endif
                     cout << "Program exited!" << endl;
+                    // cleanup();//To restore console to normal state
                     return 0;
 
                 default:
@@ -422,7 +514,7 @@ int main()
         case 2:
 
             cout << "\n1-Go To Dashboard"
-                 << "\n2-Overall Progress):"
+                 << "\n2-Overall Progress"
                  << "\n3-Change Password";
 
             cout << "\nEnter Choice:";
@@ -453,6 +545,8 @@ int main()
 
     delete admin;
     delete student;
+
+    // cleanup();//To restore console to normal state
 
     return 0;
 }
