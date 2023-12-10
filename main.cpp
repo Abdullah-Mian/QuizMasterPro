@@ -7,25 +7,7 @@
 #include"SubAdmin.h"
 #include"SuperAdmin.h"
 #include"Student.h"
-// Check if the operating system is Windows to use the sleep function
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-
-using namespace std;
-
-
-// Function to introduce a delay using sleep
-void mySleep(int seconds)
-{
-#ifdef _WIN32
-    Sleep(seconds * 1000); // Sleep takes milliseconds on Windows
-#else
-    sleep(seconds); // Sleep takes seconds on Unix-based systems
-#endif
-}
+#include "Sleep.h"  // Include the Sleep header file
 
 // Forward Declarations
 class User;
