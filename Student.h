@@ -29,6 +29,10 @@ public:
 
     // Method to get password
     string getPassword() const;
+
+    
+     // Method to get the degree
+     string getDegree() const;
 };
 
 #endif // STUDENT_H
