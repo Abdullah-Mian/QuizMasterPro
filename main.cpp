@@ -143,9 +143,24 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             break;
         case 2:
 
+    {
+        cout << "Enter Student ID: ";
+        string studentID;
+        cin >> studentID;
+
+        cout << "Enter Password: ";
+        string studentPassword;
+        cin >> studentPassword;
+        clearScreen();
+
+        //'studentID' and 'studentPassword' to authenticate the student.
+        // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
+        if (studentID == "CS123" && studentPassword == "CS")
+        {
             cout << "\n1-Go To Dashboard"
                  << "\n2-Overall Progress"
-                 << "\n3-Change Password";
+                 << "\n3-Change Password"
+                 << "\n4-Exit";
 
             cout << "\nEnter Choice:";
             cin >> choice;
@@ -162,14 +177,22 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 break;
             case 3:
                 break;
+
+            case 4:
+                    clearScreen();
+                    cout << "Program exited!" << endl;
+                    return 0;
             default:
                 break;
             }
+        }
+        else
+        {
+            cout << "Invalid Student ID or Password!" << endl;
+        }
+    }
+    break;
 
-            break;
-
-        default:
-            break;
         }
     } while (true);
 
