@@ -1,30 +1,46 @@
-#include <iostream>
+/*
+  __  __         _            _____                     _______       _____                   _ 
+ |  \/  |       | |          / ____|                   |__   __|     |  __ \                 | |
+ | \  / |  __ _ | | __ ___  | (___   _   _  _ __  ___     | |  ___   | |__) | ___   __ _   __| |
+ | |\/| | / _` || |/ // _ \  \___ \ | | | || '__|/ _ \    | | / _ \  |  _  / / _ \ / _` | / _` |
+ | |  | || (_| ||   <|  __/  ____) || |_| || |  |  __/    | || (_) | | | \ \|  __/| (_| || (_| |
+ |_|  |_| \__,_||_|\_\\___| |_____/  \__,_||_|   \___|    |_| \___/  |_|  \_\\___| \__,_| \__,_|
+  _____   ______            _____   __  __  ______                    _                         
+ |  __ \ |  ____|    /\    |  __ \ |  \/  ||  ____|                  | |                        
+ | |__) || |__      /  \   | |  | || \  / || |__       _ __ ___    __| |                        
+ |  _  / |  __|    / /\ \  | |  | || |\/| ||  __|     | '_ ` _ \  / _` |                        
+ | | \ \ | |____  / ____ \ | |__| || |  | || |____  _ | | | | | || (_| |                        
+ |_|__\_\|______|/_/    \_\|_____/ |_|  |_||______|(_)|_| |_| |_| \__,_|                        
+ |  ____|                                                                                       
+ | |__  ___   _ __                                                                              
+ |  __|/ _ \ | '__|                                                                             
+ | |  | (_) || |                                                                                
+ |_|___\___/ |_|              _                                                                 
+ |  ____|| |                 | |                                                                
+ | |__   | |  __ _ __      __| |  ___  ___  ___                                                 
+ |  __|  | | / _` |\ \ /\ / /| | / _ \/ __|/ __|                                                
+ | |     | || (_| | \ V  V / | ||  __/\__ \\__ \                                                
+ |_|____ |_| \__,_|  \_/\_/  |_| \___||___/|___/                                                
+ |  ____|                        | |  (_)                                                       
+ | |__   __  __ ___   ___  _   _ | |_  _   ___   _ __                                           
+ |  __|  \ \/ // _ \ / __|| | | || __|| | / _ \ | '_ \                                          
+ | |____  >  <|  __/| (__ | |_| || |_ | || (_) || | | |                                         
+ |______|/_/\_\\___| \___| \__,_| \__||_| \___/ |_| |_|                                                                                      
+                                                                                                                                        
+*/
+
+
+#include <iostream>         /*No Need For #include<string>*/
 #include <vector>
 #include <fstream>
 #include <list>
 
-#include"Admin.h"
-#include"SubAdmin.h"
-#include"SuperAdmin.h"
-#include"Student.h"
-// Check if the operating system is Windows to use the sleep function
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-
-using namespace std;
-
-// Function to introduce a delay using sleep
-void mySleep(int seconds)
-{
-#ifdef _WIN32
-    Sleep(seconds * 1000); // Sleep takes milliseconds on Windows
-#else
-    sleep(seconds); // Sleep takes seconds on Unix-based systems
-#endif
-}
+#include "Admin.h"
+#include "SubAdmin.h"
+#include "SuperAdmin.h"
+#include "Student.h"
+#include "Sleep.h"  // Include the Sleep header file
+#include "ClearScreen.h" // Include the ClearScreen header file
 
 // Forward Declarations
 class User;
@@ -46,12 +62,7 @@ class Student;
 
 int main()
 {
-    // Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
+    clearScreen();
 
     cout << "Program is starting..." << endl;
     for (int i = 0; i < 5; i++)
@@ -61,12 +72,7 @@ int main()
         cout << "=";
         cout.flush();
     }
-    // Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
+    clearScreen();
 
     cout << R"(
 ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
@@ -77,12 +83,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
     mySleep(1);
 
-// Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
+    clearScreen();
 
     int person;
     int choice;
@@ -94,12 +95,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     {
         cout << "Enter 1 for Admin & 2 for Student Login: ";
         cin >> person;
-// Clear screen and print message
-#ifdef _WIN32
-        system("cls");
-#elif defined(__linux__)
-        system("clear");
-#endif
+    clearScreen();
 
         switch (person)
         {
@@ -132,12 +128,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     ((SuperAdmin *)admin)->deleteSubAdmin();
                     break;
                 case 5:
-                    // Clear screen and print message
-#ifdef _WIN32
-                    system("cls");
-#elif defined(__linux__)
-                    system("clear");
-#endif
+                    clearScreen();
                     cout << "Program exited!" << endl;
                     return 0;
 
@@ -152,9 +143,24 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             break;
         case 2:
 
+    {
+        cout << "Enter Student ID: ";
+        string studentID;
+        cin >> studentID;
+
+        cout << "Enter Password: ";
+        string studentPassword;
+        cin >> studentPassword;
+        clearScreen();
+
+        //'studentID' and 'studentPassword' to authenticate the student.
+        // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
+        if (studentID == "CS123" && studentPassword == "CS")
+        {
             cout << "\n1-Go To Dashboard"
                  << "\n2-Overall Progress"
-                 << "\n3-Change Password";
+                 << "\n3-Change Password"
+                 << "\n4-Exit";
 
             cout << "\nEnter Choice:";
             cin >> choice;
@@ -171,14 +177,22 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 break;
             case 3:
                 break;
+
+            case 4:
+                    clearScreen();
+                    cout << "Program exited!" << endl;
+                    return 0;
             default:
                 break;
             }
+        }
+        else
+        {
+            cout << "Invalid Student ID or Password!" << endl;
+        }
+    }
+    break;
 
-            break;
-
-        default:
-            break;
         }
     } while (true);
 
