@@ -71,13 +71,14 @@ int main()
         cout.flush();
     }
     clearScreen();
-
+    cout << "================================================================\n";
     cout << R"(
 ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
 |  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
 |_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
                                                              
 )" << endl;
+    cout << "================================================================\n";
 
     mySleep(1);
 
@@ -105,6 +106,9 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         switch (person)
         {
         case 1:
+            cout << "================================================================\n";
+            cout << "                        Admin Panel\n";
+            cout << "================================================================\n\n";
             cout << "Enter Username: ";
             cin >> username;
             cout << "Enter Password: ";
@@ -118,23 +122,61 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 cout << "5. Exit" << endl;
                 cout << "Enter Choice: ";
                 cin >> choice;
+                char stroke;
                 switch (choice)
                 {
                 case 1:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Set Credentials\n";
+                    cout << "================================================================\n\n";
                     admin->setCredentials(username, password);
+                    cout<<"Enter Any Character to continue...";
+                    cin>>stroke;
+                    clearScreen();
                     break;
                 case 2:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Add SubAdmin\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->addSubAdmin();
+                    cout<<"Enter Any Character to continue...";
+                    cin>>stroke;
+                    clearScreen();
                     break;
                 case 3:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        View SubAdmins\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->viewSubAdmins();
+                    
+                    cout<<"Enter Any Character to continue...";
+                    cin>>stroke;
+                    clearScreen();
                     break;
                 case 4:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Delete SubAdmin\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->deleteSubAdmin();
+                    cout<<"Enter Any Character to continue...";
+                    cin>>stroke;
+                    clearScreen();
                     break;
                 case 5:
                     clearScreen();
-                    cout << "Program exited!" << endl;
+                    cout << "Exiting Program";
+                    for (int i = 0; i < 3; i++)
+                    {
+                        mySleep(1);
+
+                        cout << ".";
+                        cout.flush();
+                    }
+                    cout << endl;
                     return 0;
 
                 default:
@@ -149,6 +191,9 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         case 2:
 
         {
+            cout << "================================================================\n";
+            cout << "                        Student Panel\n";
+            cout << "================================================================\n\n";
             cout << "Enter Student ID: ";
             string studentID;
             cin >> studentID;
@@ -162,6 +207,9 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
             if (studentID == "CS123" && studentPassword == "CS")
             {
+                cout << "================================================================\n";
+                cout << "                        Student Panel\nAuthentication Successful!\n";
+                cout << "================================================================\n\n";
                 cout << "\n1-Go To Dashboard"
                      << "\n2-Overall Progress"
                      << "\n3-Change Password"
@@ -201,7 +249,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         {
             clearScreen();
             cout << "Exiting Program";
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 mySleep(1);
 

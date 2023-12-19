@@ -1,6 +1,7 @@
 #include "SuperAdmin.h"
 #include "SubAdmin.h"
 #include "Admin.h"
+#include "ClearScreen.h"
 #include <iostream>
 
 using namespace std;
@@ -73,16 +74,19 @@ void SuperAdmin::deleteSubAdmin()
             {
                 // Delete the sub-admin
                 SubAdminsVector.erase(SubAdminsVector.begin() + i);
+                clearScreen();
                 cout << "Sub-Admin Deleted Successfully!" << endl;
                 return;
             }
             else
             {
+                clearScreen();
                 cout << "Sub-Admin Not Deleted!" << endl;
                 return;
             }
             return;
         }
     }
+    clearScreen();
     cout << "Sub-Admin Not Found!" << endl;
 }
