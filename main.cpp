@@ -32,6 +32,8 @@
 #include <iostream> /*No Need For #include<string>*/
 #include <vector>
 #include <fstream>
+#include "ClearScreen.h"
+
 using namespace std;
 
 class User;
@@ -347,39 +349,39 @@ int main()
 
         break;
 
-                case 4:
+    case 4:
                     clearScreen();
                     cout << "Program exited!" << endl;
                     return 0;
                 default:
                     break;
                 }
-            }
-            else
-            {
-                cout << "Invalid Student ID or Password!" << endl;
-            }
+            // }
+            // else
+            // {
+            //     cout << "Invalid Student ID or Password!" << endl;
+            // }
         }
-        break;
-        case 3:
-        {
-            clearScreen();
-            cout << "Exiting Program";
-            for (int i = 0; i < 5; i++)
-            {
-                mySleep(1);
+//         break;
+//         case 3:
+//         {
+//             clearScreen();
+//             cout << "Exiting Program";
+//             for (int i = 0; i < 5; i++)
+//             {
+//                 mySleep(1);
 
-                cout << ".";
-                cout.flush();
-            }
-            cout << endl;
-            return 0;
-        }
-        }
-    } while (true);
+//                 cout << ".";
+//                 cout.flush();
+//             }
+//             cout << endl;
+//             return 0;
+//         }
+//         }
+//     } while (true);
 
-    delete admin;
-    delete student;
+//     delete admin;
+//     delete student;
 
-    return 0;
-}
+//     return 0;
+// }
