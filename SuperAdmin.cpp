@@ -2,11 +2,15 @@
 #include "SubAdmin.h"
 #include "Admin.h"
 #include <iostream>
+#include <vector>
+#include "ClearScreen.h"
 
 using namespace std;
 
 // Constructor for SuperAdmin
-SuperAdmin::SuperAdmin(string username, string password) : Admin(username, password) {}
+SuperAdmin::SuperAdmin(string username, string password) : Admin(username, password) {
+    adminVector.push_back(this);
+}
 
 // Method to add a sub-admin
 void SuperAdmin::addSubAdmin()
