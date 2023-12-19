@@ -131,8 +131,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     cout << "                        Set Credentials\n";
                     cout << "================================================================\n\n";
                     admin->setCredentials(username, password);
-                    cout<<"Enter Any Character to continue...";
-                    cin>>stroke;
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
                     clearScreen();
                     break;
                 case 2:
@@ -141,8 +141,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     cout << "                        Add SubAdmin\n";
                     cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->addSubAdmin();
-                    cout<<"Enter Any Character to continue...";
-                    cin>>stroke;
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
                     clearScreen();
                     break;
                 case 3:
@@ -151,9 +151,9 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     cout << "                        View SubAdmins\n";
                     cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->viewSubAdmins();
-                    
-                    cout<<"Enter Any Character to continue...";
-                    cin>>stroke;
+
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
                     clearScreen();
                     break;
                 case 4:
@@ -162,8 +162,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     cout << "                        Delete SubAdmin\n";
                     cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->deleteSubAdmin();
-                    cout<<"Enter Any Character to continue...";
-                    cin>>stroke;
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
                     clearScreen();
                     break;
                 case 5:
@@ -185,6 +185,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             }
             else
             {
+                clearScreen();
                 cout << "Invalid Username or Password!" << endl;
             }
             break;
@@ -208,7 +209,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             if (studentID == "CS123" && studentPassword == "CS")
             {
                 cout << "================================================================\n";
-                cout << "                        Student Panel\nAuthentication Successful!\n";
+                cout << "                        Student Panel!\n";
+                cout << "                   Authentication Successful" << endl;
                 cout << "================================================================\n\n";
                 cout << "\n1-Go To Dashboard"
                      << "\n2-Overall Progress"
@@ -240,8 +242,13 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 }
             }
             else
-            {
+            {   
+                char stroke;
+                clearScreen();
                 cout << "Invalid Student ID or Password!" << endl;
+                cout << "Enter Any Character to continue...";
+                cin >> stroke;
+                clearScreen();
             }
         }
         break;
