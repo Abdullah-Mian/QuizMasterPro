@@ -5,10 +5,8 @@
 using namespace std;
 
 // Constructor for SubAdmin
-SubAdmin::SubAdmin(string username, string password) : Admin(username, password)
-{
-    // Add the current SubAdmin to the vector
-    SubAdminsVector.push_back(*this);
+SubAdmin::SubAdmin(string username, string password) : Admin(username, password){
+    adminVector.push_back(this);
 }
 
 // Method to view sub-admins (overrides from the base class Admin)

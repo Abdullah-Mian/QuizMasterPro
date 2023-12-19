@@ -1,6 +1,6 @@
 #include "Admin.h"
 #include "SubAdmin.h"
-
+#include <vector>
 #include <iostream>
 
 using namespace std;
