@@ -98,6 +98,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         cout << "\n1. Admin\n";
         cout << "\n2. Student\n";
         cout << "\n3. Exit\n";
+        cout << "\nYour Selection:";
         cin >> person;
         clearScreen();
 
@@ -199,7 +200,15 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         case 3:
         {
             clearScreen();
-            cout << "Program exited!" << endl;
+            cout << "Exiting Program";
+            for (int i = 0; i < 5; i++)
+            {
+                mySleep(1);
+
+                cout << ".";
+                cout.flush();
+            }
+            cout << endl;
             return 0;
         }
         }
