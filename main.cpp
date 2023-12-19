@@ -1,36 +1,35 @@
 /*
-  __  __         _            _____                     _______       _____                   _ 
+  __  __         _            _____                     _______       _____                   _
  |  \/  |       | |          / ____|                   |__   __|     |  __ \                 | |
  | \  / |  __ _ | | __ ___  | (___   _   _  _ __  ___     | |  ___   | |__) | ___   __ _   __| |
  | |\/| | / _` || |/ // _ \  \___ \ | | | || '__|/ _ \    | | / _ \  |  _  / / _ \ / _` | / _` |
  | |  | || (_| ||   <|  __/  ____) || |_| || |  |  __/    | || (_) | | | \ \|  __/| (_| || (_| |
  |_|  |_| \__,_||_|\_\\___| |_____/  \__,_||_|   \___|    |_| \___/  |_|  \_\\___| \__,_| \__,_|
-  _____   ______            _____   __  __  ______                    _                         
- |  __ \ |  ____|    /\    |  __ \ |  \/  ||  ____|                  | |                        
- | |__) || |__      /  \   | |  | || \  / || |__       _ __ ___    __| |                        
- |  _  / |  __|    / /\ \  | |  | || |\/| ||  __|     | '_ ` _ \  / _` |                        
- | | \ \ | |____  / ____ \ | |__| || |  | || |____  _ | | | | | || (_| |                        
- |_|__\_\|______|/_/    \_\|_____/ |_|  |_||______|(_)|_| |_| |_| \__,_|                        
- |  ____|                                                                                       
- | |__  ___   _ __                                                                              
- |  __|/ _ \ | '__|                                                                             
- | |  | (_) || |                                                                                
- |_|___\___/ |_|              _                                                                 
- |  ____|| |                 | |                                                                
- | |__   | |  __ _ __      __| |  ___  ___  ___                                                 
- |  __|  | | / _` |\ \ /\ / /| | / _ \/ __|/ __|                                                
- | |     | || (_| | \ V  V / | ||  __/\__ \\__ \                                                
- |_|____ |_| \__,_|  \_/\_/  |_| \___||___/|___/                                                
- |  ____|                        | |  (_)                                                       
- | |__   __  __ ___   ___  _   _ | |_  _   ___   _ __                                           
- |  __|  \ \/ // _ \ / __|| | | || __|| | / _ \ | '_ \                                          
- | |____  >  <|  __/| (__ | |_| || |_ | || (_) || | | |                                         
- |______|/_/\_\\___| \___| \__,_| \__||_| \___/ |_| |_|                                                                                      
-                                                                                                                                        
+  _____   ______            _____   __  __  ______                    _
+ |  __ \ |  ____|    /\    |  __ \ |  \/  ||  ____|                  | |
+ | |__) || |__      /  \   | |  | || \  / || |__       _ __ ___    __| |
+ |  _  / |  __|    / /\ \  | |  | || |\/| ||  __|     | '_ ` _ \  / _` |
+ | | \ \ | |____  / ____ \ | |__| || |  | || |____  _ | | | | | || (_| |
+ |_|__\_\|______|/_/    \_\|_____/ |_|  |_||______|(_)|_| |_| |_| \__,_|
+ |  ____|
+ | |__  ___   _ __
+ |  __|/ _ \ | '__|
+ | |  | (_) || |
+ |_|___\___/ |_|              _
+ |  ____|| |                 | |
+ | |__   | |  __ _ __      __| |  ___  ___  ___
+ |  __|  | | / _` |\ \ /\ / /| | / _ \/ __|/ __|
+ | |     | || (_| | \ V  V / | ||  __/\__ \\__ \
+ |_|____ |_| \__,_|  \_/\_/  |_| \___||___/|___/
+ |  ____|                        | |  (_)
+ | |__   __  __ ___   ___  _   _ | |_  _   ___   _ __
+ |  __|  \ \/ // _ \ / __|| | | || __|| | / _ \ | '_ \
+ | |____  >  <|  __/| (__ | |_| || |_ | || (_) || | | |
+ |______|/_/\_\\___| \___| \__,_| \__||_| \___/ |_| |_|
+
 */
 
-
-#include <iostream>         /*No Need For #include<string>*/
+#include <iostream> /*No Need For #include<string>*/
 #include <vector>
 #include <fstream>
 #include <list>
@@ -39,7 +38,7 @@
 #include "SubAdmin.h"
 #include "SuperAdmin.h"
 #include "Student.h"
-#include "Sleep.h"  // Include the Sleep header file
+#include "Sleep.h"       // Include the Sleep header file
 #include "ClearScreen.h" // Include the ClearScreen header file
 
 // Forward Declarations
@@ -58,7 +57,6 @@ class Student;
 //     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
 //     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
-
 
 int main()
 {
@@ -93,9 +91,15 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
     do
     {
-        cout << "Enter 1 for Admin & 2 for Student Login: ";
+        cout << "================================================================\n";
+        cout << "                        Welcome\n";
+        cout << "================================================================\n\n";
+        cout << "Choose Any option:\n";
+        cout << "\n1. Admin\n";
+        cout << "\n2. Student\n";
+        cout << "\n3. Exit\n";
         cin >> person;
-    clearScreen();
+        clearScreen();
 
         switch (person)
         {
@@ -143,56 +147,61 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             break;
         case 2:
 
-    {
-        cout << "Enter Student ID: ";
-        string studentID;
-        cin >> studentID;
-
-        cout << "Enter Password: ";
-        string studentPassword;
-        cin >> studentPassword;
-        clearScreen();
-
-        //'studentID' and 'studentPassword' to authenticate the student.
-        // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
-        if (studentID == "CS123" && studentPassword == "CS")
         {
-            cout << "\n1-Go To Dashboard"
-                 << "\n2-Overall Progress"
-                 << "\n3-Change Password"
-                 << "\n4-Exit";
+            cout << "Enter Student ID: ";
+            string studentID;
+            cin >> studentID;
 
-            cout << "\nEnter Choice:";
-            cin >> choice;
+            cout << "Enter Password: ";
+            string studentPassword;
+            cin >> studentPassword;
+            clearScreen();
 
-            switch (choice)
+            //'studentID' and 'studentPassword' to authenticate the student.
+            // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
+            if (studentID == "CS123" && studentPassword == "CS")
             {
-            case 1:
-                // student.displaycourses();
-                break;
-            case 2:
-                // 2 methods
-                // displayoverallprogress();
-                // displaycourses();
-                break;
-            case 3:
-                break;
+                cout << "\n1-Go To Dashboard"
+                     << "\n2-Overall Progress"
+                     << "\n3-Change Password"
+                     << "\n4-Exit";
 
-            case 4:
+                cout << "\nEnter Choice:";
+                cin >> choice;
+
+                switch (choice)
+                {
+                case 1:
+                    // student.displaycourses();
+                    break;
+                case 2:
+                    // 2 methods
+                    // displayoverallprogress();
+                    // displaycourses();
+                    break;
+                case 3:
+                    break;
+
+                case 4:
                     clearScreen();
                     cout << "Program exited!" << endl;
                     return 0;
-            default:
-                break;
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                cout << "Invalid Student ID or Password!" << endl;
             }
         }
-        else
+        break;
+        case 3:
         {
-            cout << "Invalid Student ID or Password!" << endl;
+            clearScreen();
+            cout << "Program exited!" << endl;
+            return 0;
         }
-    }
-    break;
-
         }
     } while (true);
 
