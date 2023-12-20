@@ -8,9 +8,7 @@
 using namespace std;
 
 // Constructor for SuperAdmin
-SuperAdmin::SuperAdmin(string username, string password) : Admin(username, password) {
-    adminVector.push_back(this);
-}
+SuperAdmin::SuperAdmin(string username, string password) : Admin(username, password) {}
 
 // Method to add a sub-admin
 void SuperAdmin::addSubAdmin()
