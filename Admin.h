@@ -9,8 +9,10 @@ using namespace std;
 
 // Forward declaration of SubAdmin class to avoid circular dependency
 class SubAdmin;
+class Admin;
+extern vector<Admin*> adminVector;
 
-// Base class for Admin
+// Abstract Class 
 class Admin
 {
 protected:

@@ -58,6 +58,8 @@ class Student;
 
 //     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
+// Global Admin Vector
+vector<Admin *> adminVector;
 int main()
 {
     clearScreen();
@@ -89,6 +91,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     string username, password, registration;
     Admin *admin = new SuperAdmin("admin", "admin");
     Student *student = new Student("student", "CS123", "CS");
+    // cout << adminVector.size() << endl;
 
     do
     {
