@@ -6,6 +6,11 @@
 
 using namespace std;
 
+// Forward declaration of Admin class to avoid circular dependency
+class Admin;
+class Student;
+extern vector<Student*> studentVector;
+
 class Student
 {
 protected:
