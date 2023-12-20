@@ -34,62 +34,12 @@
 #include <fstream>
 #include <list>
 
-#include"Admin.h"
-#include"SubAdmin.h"
-#include"SuperAdmin.h"
-#include"Student.h"
-// Check if the operating system is Windows to use the sleep function
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif
-/*
-//OS-Independent Includes for Full Screen
-#ifdef _WIN32
-    #include <windows.h>
-#elif __linux__
-    #include <ncurses.h>
-#endif
-*/
-using namespace std;
-
-/*//Console FullScreen Function
-void setConsoleFullScreen() {
-#ifdef _WIN32
-    HWND console = GetConsoleWindow();
-    ShowWindow(console, SW_MAXIMIZE); // Maximize the console window
-#elif __linux__
-    initscr(); // initialize the library
-    raw(); // disable line buffering
-    keypad(stdscr, TRUE); // enable special keys
-
-    if (has_colors()) {
-        start_color();
-        init_pair(1, COLOR_WHITE, COLOR_BLACK);
-        attron(COLOR_PAIR(1));
-    }
-
-    clear(); // clear the screen
-    refresh(); // refresh the screen
-#endif
-}
-
-void cleanup() {
-#ifdef __linux__
-    endwin(); // clean up and restore terminal settings
-#endif
-}*/
-
-// Function to introduce a delay using sleep
-void mySleep(int seconds)
-{
-#ifdef _WIN32
-    Sleep(seconds * 1000); // Sleep takes milliseconds on Windows
-#else
-    sleep(seconds); // Sleep takes seconds on Unix-based systems
-#endif
-}
+#include "Admin.h"
+#include "SubAdmin.h"
+#include "SuperAdmin.h"
+#include "Student.h"
+#include "Sleep.h"       // Include the Sleep header file
+#include "ClearScreen.h" // Include the ClearScreen header file
 
 // Forward Declarations
 class User;
@@ -98,58 +48,9 @@ class Admin;
 class SuperAdmin;
 class Student;
 
-// Abstract Class
-class User
-{
-protected:
-    string username;
-    string password;
+//     list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
 
-public:
-    // constructor
-    User(string username, string password) : username(username), password(password) {}
-
-    // virtual destructor will ensure proper destruction of objects of derived classes
-    virtual ~User() {}
-
-    // pure virtual function
-    virtual void setCredentials(string newUsername, string newPassword) 
-        {
-        cout << "Enter Old Username: ";
-        string oldUsername;
-        cin >> oldUsername;
-        cout << "Enter Old Password: ";
-        string oldPassword;
-        cin >> oldPassword;
-        if (oldUsername == this->username && oldPassword == this->password)
-        {
-            cout << "Enter New Username: ";
-            cin >> newUsername;
-            cout << "Enter New Password: ";
-            cin >> newPassword;
-            this->username = newUsername;
-            this->password = newPassword;
-            cout << "Username and Password Changed Successfully!" << endl;
-        }
-        else
-        {
-            cout << "Username and Password Not Changed!" << endl;
-        }
-    }
-
-    // method to get username
-    string getUsername() const
-    {
-        return this->username;
-    }
-
-    // method to get password
-    string getPassword() const
-    {
-        return this->password;
-    }
-
-};
+//     list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
 
 //     list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
 
@@ -157,16 +58,11 @@ public:
 
 //     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
-
+// Global Admin Vector
+vector<Admin *> adminVector;
 int main()
 {
-    // setConsoleFullScreen();
-    // Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
+    clearScreen();
 
     cout << "Program is starting..." << endl;
     for (int i = 0; i < 5; i++)
@@ -176,49 +72,46 @@ int main()
         cout << "=";
         cout.flush();
     }
-    // Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
-
-    cout << R"(
-____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
-|  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
-|_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
+    clearScreen();
+    cout << "================================================================\n";
+//     cout << R"(
+// ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
+// |  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
+// |_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
                                                              
-)" << endl;
+// )" << endl;
+    cout << "================================================================\n";
 
     mySleep(1);
 
-// Clear screen and print message
-#ifdef _WIN32
-    system("cls");
-#elif defined(__linux__)
-    system("clear");
-#endif
+    clearScreen();
 
     int person;
     int choice;
     string username, password, registration;
     Admin *admin = new SuperAdmin("admin", "admin");
     Student *student = new Student("student", "CS123", "CS");
+    // cout << adminVector.size() << endl;
 
     do
     {
-        cout << "Enter 1 for Admin & 2 for Student Login: ";
+        cout << "================================================================\n";
+        cout << "                        Welcome\n";
+        cout << "================================================================\n\n";
+        cout << "Choose Any option:\n";
+        cout << "\n1. Admin\n";
+        cout << "\n2. Student\n";
+        cout << "\n3. Exit\n";
+        cout << "\nYour Selection:";
         cin >> person;
-// Clear screen and print message
-#ifdef _WIN32
-        system("cls");
-#elif defined(__linux__)
-        system("clear");
-#endif
+        clearScreen();
 
         switch (person)
         {
         case 1:
+            cout << "================================================================\n";
+            cout << "                        Admin Panel\n";
+            cout << "================================================================\n\n";
             cout << "Enter Username: ";
             cin >> username;
             cout << "Enter Password: ";
@@ -232,29 +125,61 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 cout << "5. Exit" << endl;
                 cout << "Enter Choice: ";
                 cin >> choice;
+                char stroke;
                 switch (choice)
                 {
                 case 1:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Set Credentials\n";
+                    cout << "================================================================\n\n";
                     admin->setCredentials(username, password);
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    clearScreen();
                     break;
                 case 2:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Add SubAdmin\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->addSubAdmin();
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    clearScreen();
                     break;
                 case 3:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        View SubAdmins\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->viewSubAdmins();
+
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    clearScreen();
                     break;
                 case 4:
+                    clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Delete SubAdmin\n";
+                    cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->deleteSubAdmin();
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    clearScreen();
                     break;
                 case 5:
-                    // Clear screen and print message
-#ifdef _WIN32
-                    system("cls");
-#elif defined(__linux__)
-                    system("clear");
-#endif
-                    cout << "Program exited!" << endl;
-                    // cleanup();//To restore console to normal state
+                    clearScreen();
+                    cout << "Exiting Program";
+                    for (int i = 0; i < 3; i++)
+                    {
+                        mySleep(1);
+
+                        cout << ".";
+                        cout.flush();
+                    }
+                    cout << endl;
                     return 0;
 
                 default:
@@ -263,45 +188,92 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             }
             else
             {
+                clearScreen();
                 cout << "Invalid Username or Password!" << endl;
             }
             break;
         case 2:
 
-            cout << "\n1-Go To Dashboard"
-                 << "\n2-Overall Progress"
-                 << "\n3-Change Password";
+        {
+            cout << "================================================================\n";
+            cout << "                        Student Panel\n";
+            cout << "================================================================\n\n";
+            cout << "Enter Student ID: ";
+            string studentID;
+            cin >> studentID;
 
-            cout << "\nEnter Choice:";
-            cin >> choice;
+            cout << "Enter Password: ";
+            string studentPassword;
+            cin >> studentPassword;
+            clearScreen();
 
-            switch (choice)
+            //'studentID' and 'studentPassword' to authenticate the student.
+            // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
+            if (studentID == "CS123" && studentPassword == "CS")
             {
-            case 1:
-                // student.displaycourses();
-                break;
-            case 2:
-                // 2 methods
-                // displayoverallprogress();
-                // displaycourses();
-                break;
-            case 3:
-                break;
-            default:
-                break;
+                cout << "================================================================\n";
+                cout << "                        Student Panel!\n";
+                cout << "                   Authentication Successful" << endl;
+                cout << "================================================================\n\n";
+                cout << "\n1-Go To Dashboard"
+                     << "\n2-Overall Progress"
+                     << "\n3-Change Password"
+                     << "\n4-Exit";
+
+                cout << "\nEnter Choice:";
+                cin >> choice;
+
+                switch (choice)
+                {
+                case 1:
+                    // student.displaycourses();
+                    break;
+                case 2:
+                    // 2 methods
+                    // displayoverallprogress();
+                    // displaycourses();
+                    break;
+                case 3:
+                    break;
+
+                case 4:
+                    clearScreen();
+                    cout << "Program exited!" << endl;
+                    return 0;
+                default:
+                    break;
+                }
             }
+            else
+            {   
+                char stroke;
+                clearScreen();
+                cout << "Invalid Student ID or Password!" << endl;
+                cout << "Enter Any Character to continue...";
+                cin >> stroke;
+                clearScreen();
+            }
+        }
+        break;
+        case 3:
+        {
+            clearScreen();
+            cout << "Exiting Program";
+            for (int i = 0; i < 3; i++)
+            {
+                mySleep(1);
 
-            break;
-
-        default:
-            break;
+                cout << ".";
+                cout.flush();
+            }
+            cout << endl;
+            return 0;
+        }
         }
     } while (true);
 
     delete admin;
     delete student;
-
-    // cleanup();//To restore console to normal state
 
     return 0;
 }

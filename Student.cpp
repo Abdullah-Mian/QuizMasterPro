@@ -37,9 +37,3 @@ string Student::getPassword() const
 {
     return this->password;
 }
-
-// Method to get degree
-string Student::getDegree() const
-{
-    return this->degreeProgram;
-}
