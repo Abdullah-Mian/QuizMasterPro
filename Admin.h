@@ -40,6 +40,9 @@ public:
 
     // Method to get password
     string getPassword() const;
+
+    // Method to enroll a student
+    void enrollStudent();
 };
 
 #endif // ADMIN_H

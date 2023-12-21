@@ -49,26 +49,31 @@ class Admin;
 class SuperAdmin;
 class Student;
 
-//     list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
+//   CS  list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
 
-//     list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
+//   EE  list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
 
-//     list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
+//   SE  list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
 
-//     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
+//   CE  list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
-//     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
+//  CHE   list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
 // Global Admin Vector
 vector<Admin *> adminVector;
+vector<Student *> studentVector;
 // Function to load admins from file
 void loadAdmins();
 // Function to save admins to file
 void saveAdmins();
 
+void saveStudents();
+void loadStudents();
+
 int main()
-{   
-    //loadAdmins();
+{
+    loadAdmins();
+    loadStudents();
 
     clearScreen();
 
@@ -100,7 +105,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     Admin *admin = new SuperAdmin("admin", "admin");
     Admin *admin1 = new SubAdmin("S", "123");
     SubAdmin("HEHE", "subadmin");
-    Student *student = new Student("student", "CS123", "CS");
+    Student *student = new Student("student", "CS", "CS");
     // cout << adminVector.size() << endl;
     saveAdmins();
 
@@ -114,7 +119,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         cout << "\n2. Student\n";
         cout << "\n3. Exit\n";
         cout << "\nYour Selection:";
-                    saveAdmins();
+        saveAdmins();
 
         cin >> person;
         clearScreen();
@@ -135,7 +140,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 cout << "2. Add Sub-Admin" << endl;
                 cout << "3. View Sub-Admins" << endl;
                 cout << "4. Delete Sub-Admin" << endl;
-                cout << "5. Exit" << endl;
+                cout << "5. Enroll Student" << endl;
+                cout << "6. Exit" << endl;
                 cout << "Enter Choice: ";
                 cin >> choice;
                 char stroke;
@@ -184,6 +190,16 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     break;
                 case 5:
                     clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Enroll Student\n";
+                    cout << "================================================================\n\n";
+                    admin->enrollStudent();
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    clearScreen();
+                    break;
+                case 6:
+                    clearScreen();
                     cout << "Exiting Program";
                     for (int i = 0; i < 3; i++)
                     {
@@ -221,12 +237,12 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             clearScreen();
 
             //'studentID' and 'studentPassword' to authenticate the student.
-            // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
-            if (studentID == "CS123" && studentPassword == "CS")
+            // For simplicity, let's assume the correct student ID and password are "CS" and "CS" respectively.
+            if (studentID == "CS" && studentPassword == "CS")
             {
                 cout << "================================================================\n";
-                cout << "                        Student Panel!\n";
-                cout << "                   Authentication Successful" << endl;
+                cout << "                        Student Panel\n";
+                cout << "                   Authentication Successful!" << endl;
                 cout << "================================================================\n\n";
                 cout << "\n1-Go To Dashboard"
                      << "\n2-Overall Progress"
@@ -258,7 +274,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 }
             }
             else
-            {   
+            {
                 char stroke;
                 clearScreen();
                 cout << "Invalid Student ID or Password!" << endl;
@@ -279,6 +295,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 cout << ".";
                 cout.flush();
             }
+            saveAdmins();
+            saveStudents();
             cout << endl;
             return 0;
         }
@@ -286,7 +304,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     } while (true);
 
     delete admin;
-    delete student;
+    // delete student;
 
     return 0;
 }
