@@ -29,6 +29,7 @@
 
 */
 
+
 #include <iostream> /*No Need For #include<string>*/
 #include <vector>
 #include <fstream>
@@ -40,6 +41,7 @@
 #include "Student.h"
 #include "Sleep.h"       // Include the Sleep header file
 #include "ClearScreen.h" // Include the ClearScreen header file
+#include "Init.h"        // Include the Init header file
 
 // Forward Declarations
 class User;
@@ -60,8 +62,14 @@ class Student;
 
 // Global Admin Vector
 vector<Admin *> adminVector;
+// Function to load admins from file
+void loadAdmins();
+// Function to save admins to file
+void saveAdmins();
+
 int main()
-{
+{   
+    loadAdmins();
     clearScreen();
 
     cout << "Program is starting..." << endl;
@@ -74,12 +82,13 @@ int main()
     }
     clearScreen();
     cout << "================================================================\n";
-//     cout << R"(
-// ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
-// |  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
-// |_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
+   cout << R"(
+____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
+|  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
+|_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
                                                              
-// )" << endl;
+)" << endl;
+
     cout << "================================================================\n";
 
     mySleep(1);
@@ -90,8 +99,11 @@ int main()
     int choice;
     string username, password, registration;
     Admin *admin = new SuperAdmin("admin", "admin");
+    Admin *admin1 = new SubAdmin("S", "123");
+    SubAdmin("HEHE", "subadmin");
     Student *student = new Student("student", "CS123", "CS");
-    // cout << adminVector.size() << endl;
+    cout << adminVector.size() << endl;
+    saveAdmins();
 
     do
     {
@@ -103,6 +115,8 @@ int main()
         cout << "\n2. Student\n";
         cout << "\n3. Exit\n";
         cout << "\nYour Selection:";
+                    saveAdmins();
+
         cin >> person;
         clearScreen();
 

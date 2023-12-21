@@ -12,7 +12,7 @@ protected:
     string registration;
     string password;
     string degreeProgram;
-    // vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Software Engineering", "Computer Engineering", "Chemical Engineering"};
+    vector<string> degree_programs = {"Computer Science", "Electrical Engineering", "Software Engineering", "Computer Engineering", "Chemical Engineering"};
 public:
     // Constructor for Student
     Student(string password, string registration, string degProgram);
