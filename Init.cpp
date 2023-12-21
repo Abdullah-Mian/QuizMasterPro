@@ -4,8 +4,23 @@
 #include "SuperAdmin.h"
 #include "SubAdmin.h"
 #include "Student.h"
+#include <algorithm>
+#include <cctype>
+#include <vector>
+#include <string>
 
 using namespace std;
+
+// Function to convert a string to lowercase
+string toLowerCase(string str)
+{
+    // Convert the string to lowercase
+    transform(str.begin(), str.end(), str.begin(), [](unsigned char c)
+              { return tolower(c); });
+
+    // Return the lowercase string
+    return str;
+}
 
 // Function to load admins from file
 void loadAdmins()
@@ -72,4 +87,42 @@ void saveAdmins()
 
     // Close the file
     outFile.close();
+}
+
+// Function to check if a username exists in a vector of students
+// and return its index, or -1 if not found
+int usernameExists(string registration)
+{
+
+    // Loop through the vector
+    for (int i = 0; i < studentVector.size(); i++)
+    {
+        // Check if the registration matches
+        if (toLowerCase(studentVector[i]->getRegistration()) == toLowerCase(registration))
+        {
+            // Return the index
+            return i;
+        }
+    }
+
+    // Return -1 if not found
+    return -1;
+}
+
+// Function to check if a username exists in a vector of Admins
+int usernameExistsAdmin(string username)
+{
+    // Loop through the vector
+    for (int i = 0; i < adminVector.size(); i++)
+    {
+        // Check if the username matches
+        if (toLowerCase(adminVector[i]->getUsername()) == toLowerCase(username))
+        {
+            // Return the index
+            return i;
+        }
+    }
+
+    // Return -1 if not found
+    return -1;
 }

@@ -59,16 +59,16 @@ class Student;
 
 //  CHE   list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
-// Global Admin Vector
+// Redeclaration of Globals
 vector<Admin *> adminVector;
 vector<Student *> studentVector;
-// Function to load admins from file
 void loadAdmins();
-// Function to save admins to file
 void saveAdmins();
-
 void saveStudents();
 void loadStudents();
+string toLowerCase(string str);
+int usernameExists(string username);
+int usernameExistsAdmin(string username);
 
 int main()
 {
@@ -101,13 +101,14 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
     int person;
     int choice;
-    string username, password, registration;
+    int index;
+    string username;
+    string password;
+    string StudentReg;
+
     Admin *admin = new SuperAdmin("admin", "admin");
-    Admin *admin1 = new SubAdmin("S", "123");
-    SubAdmin("HEHE", "subadmin");
-    Student *student = new Student("student", "CS", "CS");
-    // cout << adminVector.size() << endl;
-    saveAdmins();
+    adminVector.push_back(admin);
+    // cout << toLowerCase("ABDULLAH") << endl;
 
     do
     {
@@ -132,9 +133,19 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             cout << "================================================================\n\n";
             cout << "Enter Username: ";
             cin >> username;
-            cout << "Enter Password: ";
-            cin >> password;
-            if (username == admin->getUsername() && password == admin->getPassword())
+            index = usernameExistsAdmin(username);
+            if (index != -1)
+            {
+                cout << "Enter password: ";
+                cin >> password;
+            }
+            else
+            {
+                cout << "Username does not exist." << endl;
+            }
+            // to traverse the vector of admins and check if the username and password match
+
+            if (adminVector[index]->getPassword() == password)
             {
                 cout << "1. Change Username & Password" << endl;
                 cout << "2. Add Sub-Admin" << endl;
@@ -218,27 +229,39 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             else
             {
                 clearScreen();
-                cout << "Invalid Username or Password!" << endl;
+                cout << "Invalid Password!" << endl;
+                cout << "1. try again" << endl;
+                cout << "2. Exit" << endl;
+                cout << "Enter Choice: ";
+                cin >> choice;  
+                if (choice == 1){
+
+                    break;
+                } else{
+                    return 0;
+                }
             }
-            break;
         case 2:
 
         {
             cout << "================================================================\n";
             cout << "                        Student Panel\n";
             cout << "================================================================\n\n";
-            cout << "Enter Student ID: ";
-            string studentID;
-            cin >> studentID;
-
-            cout << "Enter Password: ";
-            string studentPassword;
-            cin >> studentPassword;
+            cout << "Enter Student Registration number: ";
+            cin >> StudentReg;
+            index = usernameExists(StudentReg);
+            if (index != -1)
+            {
+                cout << "Enter password: ";
+                cin >> password;
+            }
+            else
+            {
+                cout << "Student does not exist." << endl;
+            }
             clearScreen();
 
-            //'studentID' and 'studentPassword' to authenticate the student.
-            // For simplicity, let's assume the correct student ID and password are "CS" and "CS" respectively.
-            if (studentID == "CS" && studentPassword == "CS")
+            if (studentVector[index]->getPassword() == password)
             {
                 cout << "================================================================\n";
                 cout << "                        Student Panel\n";
@@ -267,6 +290,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
                 case 4:
                     clearScreen();
+                    saveStudents();
                     cout << "Program exited!" << endl;
                     return 0;
                 default:
@@ -277,10 +301,19 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             {
                 char stroke;
                 clearScreen();
-                cout << "Invalid Student ID or Password!" << endl;
-                cout << "Enter Any Character to continue...";
-                cin >> stroke;
-                clearScreen();
+                cout << "Invalid Password!" << endl;
+                 cout << "1. try again" << endl;
+                cout << "2. Exit" << endl;
+                cout << "Enter Choice: ";
+                cin >> choice;  
+                if (choice == 1){
+                    cin >> stroke;
+                    clearScreen();
+                    break;
+                } else{
+                    return 0;
+                }
+                
             }
         }
         break;
