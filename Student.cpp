@@ -53,9 +53,15 @@ string Student::getDegree() const
 // Method to display courses
 void Student::displayCourses() const
 {
-    cout << "Courses: " << endl;
+    cout << "Registered Courses: " << endl;
     for (int i = 0; i < courses.size(); i++)
     {
-        cout << courses[i] << endl;
+        cout << i+1 << ". " << courses[i] << endl;
     }
+}
+
+// Method to get courses
+vector<string> Student::getCourses() const
+{
+    return this->courses;
 }

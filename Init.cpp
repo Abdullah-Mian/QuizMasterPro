@@ -34,18 +34,28 @@ void loadAdmins()
     inFile.close();
 }
 
+// Function to load students from file
 void loadStudents()
 {
-    ifstream inFile("Students.txt");
-    string username, password, registration, degProgram;
+    ifstream in_file("Students.txt");
+    string registration, password, degree;
 
-    while (getline(inFile, username) && getline(inFile, password) && getline(inFile, registration) && getline(inFile, degProgram))
-    {
-        studentVector.push_back(new Student(password, registration, degProgram));
+    // Check if the file is open
+    if (in_file.is_open()) {
+        // Read the file line by line
+        while (getline(in_file, registration) && getline(in_file, password) && getline(in_file, degree))
+        {
+            // Add a new Student object to the vector
+            new Student( password,registration, degree);
+        }
+        // Close the file
+        in_file.close();
+    } else {
+        // Handle the error
+        cerr << "Error opening Students.txt file" << endl;
     }
-
-    inFile.close();
 }
+
 
 void saveStudents()
 {

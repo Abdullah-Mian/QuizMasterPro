@@ -24,11 +24,11 @@ protected:
 
     // Map to store degree programs and corresponding courses
     map<string, vector<string>> degreeCourses = {
-        {"BSCS", {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"}},
-        {"BSEE", {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"}},
-        {"BSSE", {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"}},
-        {"BSCE", {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"}},
-        {"BSCHE", {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"}}};
+        {"BSCS", {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)"}},
+        {"BSEE", {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)"}},
+        {"BSSE", {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)"}},
+        {"BSCE", {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)"}},
+        {"BSCHE", {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)"}}};
 
 public:
     // Constructor for Student
@@ -49,6 +49,9 @@ public:
 
     // Method to get the degree
     string getDegree() const;
+     
+    // Method to get the courses
+    vector<string> getCourses() const;
 };
 
 #endif // STUDENT_H
