@@ -1,5 +1,6 @@
 #include "Admin.h"
 #include "SubAdmin.h"
+#include "Student.h"
 #include <vector>
 #include <iostream>
 
@@ -46,4 +47,26 @@ string Admin::getUsername() const
 string Admin::getPassword() const
 {
     return this->password;
+}
+
+// Method to enroll a student
+void Admin::enrollStudent()
+{
+    string registration, password, degreeProgram;
+    int degreeProgramIndex;
+    cout << "Enter Registration: ";
+    cin >> registration;
+    cout << "Enter Password: ";
+    cin >> password;
+    // display degree programs with index
+    cout << "Degree Programs: " << endl;
+    for (int i = 0; i < degree_programs.size(); i++)
+    {
+        cout << i + 1 << ". " << degree_programs[i] << endl;
+    }
+    cout << "Enter Degree Program Index: ";
+    cin >> degreeProgramIndex;
+    degreeProgram = degree_programs[degreeProgramIndex - 1];
+    new Student(password, registration, degreeProgram);
+    cout << "Student Enrolled Successfully!" << endl;
 }

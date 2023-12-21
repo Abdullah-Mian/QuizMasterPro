@@ -29,7 +29,6 @@
 
 */
 
-
 #include <iostream> /*No Need For #include<string>*/
 #include <vector>
 #include <fstream>
@@ -50,60 +49,66 @@ class Admin;
 class SuperAdmin;
 class Student;
 
-//     list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
+//   CS  list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
 
-//     list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
+//   EE  list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
 
-//     list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
+//   SE  list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
 
-//     list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
+//   CE  list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
 
-//     list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
+//  CHE   list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
-// Global Admin Vector
+// Redeclaration of Globals
 vector<Admin *> adminVector;
-// Function to load admins from file
+vector<Student *> studentVector;
 void loadAdmins();
-// Function to save admins to file
 void saveAdmins();
+void saveStudents();
+void loadStudents();
+string toLowerCase(string str);
+int usernameExists(string username);
+int usernameExistsAdmin(string username);
 
 int main()
-{   
+{
     loadAdmins();
-    clearScreen();
+    loadStudents();
+
+    // clearScreen();
 
     cout << "Program is starting..." << endl;
     for (int i = 0; i < 5; i++)
     {
-        mySleep(1);
+        // mySleep(1);
 
         cout << "=";
         cout.flush();
     }
-    clearScreen();
+    // clearScreen();
     cout << "================================================================\n";
-   cout << R"(
+    cout << R"(
 ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____ 
 |  | |  | |   /  |\/| |__| [__   |  |___ |__/ |__] |__/ |  | 
 |_\| |__| |  /__ |  | |  | ___]  |  |___ |  \ |    |  \ |__| 
                                                              
 )" << endl;
-
     cout << "================================================================\n";
 
-    mySleep(1);
+    // mySleep(1);
 
-    clearScreen();
+    // clearScreen();
 
     int person;
     int choice;
-    string username, password, registration;
+    int index;
+    string username;
+    string password;
+    string StudentReg;
+
     Admin *admin = new SuperAdmin("admin", "admin");
-    Admin *admin1 = new SubAdmin("S", "123");
-    SubAdmin("HEHE", "subadmin");
-    Student *student = new Student("student", "CS123", "CS");
-    cout << adminVector.size() << endl;
-    saveAdmins();
+    adminVector.push_back(admin);
+    // cout << toLowerCase("ABDULLAH") << endl;
 
     do
     {
@@ -115,10 +120,10 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         cout << "\n2. Student\n";
         cout << "\n3. Exit\n";
         cout << "\nYour Selection:";
-                    saveAdmins();
+        saveAdmins();
 
         cin >> person;
-        clearScreen();
+        // clearScreen();
 
         switch (person)
         {
@@ -128,42 +133,53 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             cout << "================================================================\n\n";
             cout << "Enter Username: ";
             cin >> username;
-            cout << "Enter Password: ";
-            cin >> password;
-            if (username == admin->getUsername() && password == admin->getPassword())
+            index = usernameExistsAdmin(username);
+            if (index != -1)
+            {
+                cout << "Enter password: ";
+                cin >> password;
+            }
+            else
+            {
+                cout << "Username does not exist." << endl;
+            }
+            // to traverse the vector of admins and check if the username and password match
+
+            if (adminVector[index]->getPassword() == password)
             {
                 cout << "1. Change Username & Password" << endl;
                 cout << "2. Add Sub-Admin" << endl;
                 cout << "3. View Sub-Admins" << endl;
                 cout << "4. Delete Sub-Admin" << endl;
-                cout << "5. Exit" << endl;
+                cout << "5. Enroll Student" << endl;
+                cout << "6. Exit" << endl;
                 cout << "Enter Choice: ";
                 cin >> choice;
                 char stroke;
                 switch (choice)
                 {
                 case 1:
-                    clearScreen();
+                    // clearScreen();
                     cout << "================================================================\n";
                     cout << "                        Set Credentials\n";
                     cout << "================================================================\n\n";
-                    admin->setCredentials(username, password);
+                    adminVector[index]->setCredentials(username, password);
                     cout << "Enter Any Character to continue...";
                     cin >> stroke;
-                    clearScreen();
+                    // clearScreen();
                     break;
                 case 2:
-                    clearScreen();
+                    // clearScreen();
                     cout << "================================================================\n";
                     cout << "                        Add SubAdmin\n";
                     cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->addSubAdmin();
                     cout << "Enter Any Character to continue...";
                     cin >> stroke;
-                    clearScreen();
+                    // clearScreen();
                     break;
                 case 3:
-                    clearScreen();
+                    // clearScreen();
                     cout << "================================================================\n";
                     cout << "                        View SubAdmins\n";
                     cout << "================================================================\n\n";
@@ -171,20 +187,30 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
 
                     cout << "Enter Any Character to continue...";
                     cin >> stroke;
-                    clearScreen();
+                    // clearScreen();
                     break;
                 case 4:
-                    clearScreen();
+                    // clearScreen();
                     cout << "================================================================\n";
                     cout << "                        Delete SubAdmin\n";
                     cout << "================================================================\n\n";
                     ((SuperAdmin *)admin)->deleteSubAdmin();
                     cout << "Enter Any Character to continue...";
                     cin >> stroke;
-                    clearScreen();
+                    // clearScreen();
                     break;
                 case 5:
-                    clearScreen();
+                    // clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Enroll Student\n";
+                    cout << "================================================================\n\n";
+                    admin->enrollStudent();
+                    cout << "Enter Any Character to continue...";
+                    cin >> stroke;
+                    // clearScreen();
+                    break;
+                case 6:
+                    // clearScreen();
                     cout << "Exiting Program";
                     for (int i = 0; i < 3; i++)
                     {
@@ -202,32 +228,47 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
             }
             else
             {
-                clearScreen();
-                cout << "Invalid Username or Password!" << endl;
+                // clearScreen();
+                cout << "Invalid Password!" << endl;
+                cout << "1. try again" << endl;
+                cout << "2. Exit" << endl;
+                cout << "Enter Choice: ";
+                cin >> choice;
+                if (choice == 1)
+                {
+
+                    break;
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            break;
         case 2:
 
         {
             cout << "================================================================\n";
             cout << "                        Student Panel\n";
             cout << "================================================================\n\n";
-            cout << "Enter Student ID: ";
-            string studentID;
-            cin >> studentID;
+            cout << "Enter Student Registration number: ";
+            cin >> StudentReg;
+            index = usernameExists(StudentReg);
+            if (index != -1)
+            {
+                cout << "Enter password: ";
+                cin >> password;
+            }
+            else
+            {
+                cout << "Student does not exist." << endl;
+            }
+            // clearScreen();
 
-            cout << "Enter Password: ";
-            string studentPassword;
-            cin >> studentPassword;
-            clearScreen();
-
-            //'studentID' and 'studentPassword' to authenticate the student.
-            // For simplicity, let's assume the correct student ID and password are "CS123" and "CS" respectively.
-            if (studentID == "CS123" && studentPassword == "CS")
+            if (studentVector[index]->getPassword() == password)
             {
                 cout << "================================================================\n";
-                cout << "                        Student Panel!\n";
-                cout << "                   Authentication Successful" << endl;
+                cout << "                        Student Panel\n";
+                cout << "                   Authentication Successful!" << endl;
                 cout << "================================================================\n\n";
                 cout << "\n1-Go To Dashboard"
                      << "\n2-Overall Progress"
@@ -240,7 +281,17 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 switch (choice)
                 {
                 case 1:
-                    // student.displaycourses();
+                    // clearScreen();
+                    studentVector[index]->displayCourses();
+                    cout << "Select Course:";
+                    cin >> choice;
+                    // clearScreen();
+                    if (choice > studentVector[index]->getCourses().size())
+                    {
+                        cout << "Invalid Choice!" << endl;
+                        break;
+                    }
+                    cout << studentVector[index]->getCourses()[choice - 1] << endl;
                     break;
                 case 2:
                     // 2 methods
@@ -248,10 +299,16 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     // displaycourses();
                     break;
                 case 3:
+                    // clearScreen();
+                    cout << "================================================================\n";
+                    cout << "                        Set Credentials\n";
+                    cout << "================================================================\n\n";
+                    studentVector[index]->setCredentials(password);
                     break;
 
                 case 4:
-                    clearScreen();
+                    // clearScreen();
+                    saveStudents();
                     cout << "Program exited!" << endl;
                     return 0;
                 default:
@@ -259,19 +316,30 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 }
             }
             else
-            {   
+            {
                 char stroke;
-                clearScreen();
-                cout << "Invalid Student ID or Password!" << endl;
-                cout << "Enter Any Character to continue...";
-                cin >> stroke;
-                clearScreen();
+                // clearScreen();
+                cout << "Invalid Password!" << endl;
+                cout << "1. try again" << endl;
+                cout << "2. Exit" << endl;
+                cout << "Enter Choice: ";
+                cin >> choice;
+                if (choice == 1)
+                {
+                    cin >> stroke;
+                    // clearScreen();
+                    break;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
         break;
         case 3:
         {
-            clearScreen();
+            // clearScreen();
             cout << "Exiting Program";
             for (int i = 0; i < 3; i++)
             {
@@ -280,6 +348,8 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                 cout << ".";
                 cout.flush();
             }
+            saveAdmins();
+            saveStudents();
             cout << endl;
             return 0;
         }
@@ -287,7 +357,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     } while (true);
 
     delete admin;
-    delete student;
+    // delete student;
 
     return 0;
 }
