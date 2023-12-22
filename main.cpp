@@ -41,6 +41,9 @@
 #include "Sleep.h"       // Include the Sleep header file
 #include "ClearScreen.h" // Include the ClearScreen header file
 #include "Init.h"        // Include the Init header file
+#include "Quiz.h"        // Include the Quiz header file
+#include "QuizManager.h" // Include the QuizManager header file
+
 
 // Forward Declarations
 class User;
@@ -106,9 +109,10 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     string password;
     string StudentReg;
 
+    QuizManager quizManager(quizzes);
+    Quiz *quiz;
     Admin *admin = new SuperAdmin("admin", "admin");
     adminVector.push_back(admin);
-    // cout << toLowerCase("ABDULLAH") << endl;
 
     do
     {
@@ -173,7 +177,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                     cout << "================================================================\n";
                     cout << "                        Add SubAdmin\n";
                     cout << "================================================================\n\n";
-                    ((SuperAdmin *)admin)->addSubAdmin();
+                    adminVector[index]->addSubAdmin();
                     cout << "Enter Any Character to continue...";
                     cin >> stroke;
                     // clearScreen();
@@ -291,7 +295,9 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                         cout << "Invalid Choice!" << endl;
                         break;
                     }
-                    cout << studentVector[index]->getCourses()[choice - 1] << endl;
+                    cout << studentVector[index]->getCoursesCodes()[choice - 1] << endl;
+                    quiz = quizManager.selectCourse(studentVector[index]->getCoursesCodes()[choice - 1]);
+                    quizManager.startQuiz(quiz);
                     break;
                 case 2:
                     // 2 methods
