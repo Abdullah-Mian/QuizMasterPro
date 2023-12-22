@@ -31,10 +31,10 @@ public:
     void display();
 
     // Declare the method to take the quiz
-    void take();
+    void take(int i);
 
-    // // method to get Questions vector
-    // vector<Question> getQuestions();
+    // method to get Questions vector
+    vector<Question> getQuestions();
 };
 
 // Declare the map of quizzes

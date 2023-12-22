@@ -1,4 +1,4 @@
-# Compile each source file into object files
+<!-- # Compile each source file into object files
 g++ -c main.cpp -o main.o
 g++ -c Sleep.cpp -o Sleep.o
 g++ -c Admin.cpp -o Admin.o
@@ -14,12 +14,12 @@ g++ -c QuizManager.cpp -o QuizManager.o  # Add this line to compile QuizManager.
 g++ main.o Sleep.o Admin.o SubAdmin.o SuperAdmin.o Student.o ClearScreen.o Init.o Quiz.o QuizManager.o -o QuizMasterPro  # Include Quiz.o and QuizManager.o
 
 # Run the executable
-./QuizMasterPro
+./QuizMasterPro -->
 
 
 
-<!-- # Compile and link all the .cpp files in the current directory
+# Compile and link all the .cpp files in the current directory
 g++ *.cpp -o QuizMasterPro
 
 # Run the executable
-./QuizMasterPro -->
+./QuizMasterPro

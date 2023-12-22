@@ -1,8 +1,10 @@
 // Include the header file for the Quiz class
 #include "Quiz.h"
+#include "ClearScreen.h"
 
 using namespace std;
 
+int score = 0; // Variable to keep track of the score
 // Define the map of quizzes
 map<string, Quiz> quizzes = {
     {"CS 101", Quiz("CS 101", {{"What is the output of the following C++ code?\n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int y = 20;\n    cout << x + y << endl;\n    return 0;\n}\n", {"10", "20", "30", "40"}, 'C'},
@@ -51,10 +53,11 @@ Quiz::Quiz(string course, std::vector<Question> questions) : course(course), que
 // Define the method to display the quiz
 void Quiz::display()
 {
+    int i = 0;
     cout << "Quiz for " << course << endl;
     cout << "---------------------" << endl;
     // Loop over the questions vector and print each question with its options
-    for (int i = 0; i < questions.size(); i++)
+    for (i; i < questions.size(); i++)
     {
         cout << i + 1 << ". " << questions[i].text << endl;
         // Loop over the options vector and print each option with a letter
@@ -63,16 +66,17 @@ void Quiz::display()
             cout << char('A' + j) << ") " << questions[i].options[j] << endl;
         }
         cout << endl;
+        take(i);
+        clearScreen();
     }
+    cout << "Your score is " << score << " out of " << i << endl;
 }
 
 // Define the method to take the quiz
-void Quiz::take()
+void Quiz::take(int i)
 {
-    int score = 0; // Variable to keep track of the score
-    // Loop over the questions vector and prompt the user to enter their answer
-    for (int i = 0; i < questions.size(); i++)
-    {
+    
+
         cout << "Enter your answer for question " << i + 1 << ": ";
         char answer;
         cin >> answer;
@@ -101,13 +105,10 @@ void Quiz::take()
             break;
         }
         cout << endl;
-    }
-    // Print the score
-    cout << "Your score is " << score << " out of " << questions.size() << endl;
 }
 
-// // method to get Questions vector
-// vector<Question> Quiz::getQuestions()
-// {
-//     return questions;
-// }
+// method to get Questions vector
+vector<Question> Quiz::getQuestions()
+{
+    return questions;
+}

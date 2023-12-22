@@ -44,10 +44,8 @@ void QuizManager::startQuiz(Quiz *quiz)
     // Check if the quiz is not nullptr
     if (quiz != nullptr)
     {   
-        // int index = 0;
         // Call the quiz's display and take methods
         quiz->display();
-        quiz->take();
-        // index = quiz->getQuestions().size();
+        // quiz->take();
     }
 }
