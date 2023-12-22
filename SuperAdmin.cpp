@@ -38,7 +38,7 @@ void SuperAdmin::addSubAdmin()
     } while (exists);
 
     // Add the new sub-admin
-    SubAdminsVector.push_back(SubAdmin(username, password));
+    new SubAdmin(username, password);
     cout << "Sub-Admin Added Successfully!" << endl;
 }
 

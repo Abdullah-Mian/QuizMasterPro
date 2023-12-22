@@ -6,7 +6,7 @@
 #endif
 
 #include "Sleep.h"
-
+//OS Independent Sleep implementation
 void mySleep(int seconds)
 {
 #ifdef _WIN32
