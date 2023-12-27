@@ -7,3 +7,6 @@ BSEE
 FA21
 11
 BSSE
+FA22-026
+cui
+BSCS
