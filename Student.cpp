@@ -1,4 +1,5 @@
 #include "Student.h"
+#include "Init.h"
 
 vector<string> degree_programs = {"BSCS", "BSEE", "BSSE", "BSCE", "BSCHE"};
 // vector<string> CScourses = {"(CS 101)", "(CS 201)"};
@@ -36,6 +37,7 @@ void Student::setCredentials(string newPassword)
         cin >> newPassword;
         this->password = newPassword;
         cout << "Password Changed Successfully!" << endl;
+        saveStudents();
     }
     else
     {
