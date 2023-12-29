@@ -79,7 +79,7 @@ int main()
     cout << "Program is starting..." << endl;
     for (int i = 0; i < 5; i++)
     {
-        // mySleep(1);
+        mySleep(1);
 
         cout << "=";
         cout.flush();
