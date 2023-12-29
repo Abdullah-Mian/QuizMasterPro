@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +20,11 @@
             transition: background-color 0.3s ease;
         }
 
-        h1 {
+        header {
             color: #3498db;
         }
 
-        a {
+        nav a {
             display: block;
             margin: 20px;
             padding: 15px;
@@ -35,7 +36,7 @@
             position: relative;
         }
 
-        a:hover {
+        nav a:hover {
             background-color: #2980b9;
         }
 
@@ -83,28 +84,34 @@
         }
     </style>
 </head>
+
 <body>
 
-<h1>OOP PROJECT CHANGELOG</h1>
+    <header>
+        <h1>OOP PROJECT CHANGELOG</h1>
+    </header>
 
-<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/main/" target="_blank">
-    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Abdullah
-</a>
-<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Faizy" target="_blank">
-    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Faizan
-</a>
-<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Ali" target="_blank">
-    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Ali
-</a>
+    <nav>
+        <a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/main/" target="_blank">
+            <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Abdullah
+        </a>
+        <a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Faizy" target="_blank">
+            <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Faizan
+        </a>
+        <a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Ali" target="_blank">
+            <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Ali
+        </a>
+    </nav>
 
-<!-- Dark/Light mode toggle button -->
-<button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+    <!-- Dark/Light mode toggle button -->
+    <button class="mode-toggle" onclick="toggleMode()" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
 
-<script>
-    function toggleMode() {
-        document.body.classList.toggle('dark-mode');
-    }
-</script>
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 
 </body>
+
 </html>
