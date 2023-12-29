@@ -8,6 +8,8 @@
 #include <cctype>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -135,4 +137,10 @@ int usernameExistsAdmin(string username)
 
     // Return -1 if not found
     return -1;
+}
+
+int generateRandomNumber(int n)
+{
+    srand(time(0));
+    return rand() % n;
 }

@@ -44,22 +44,14 @@
 #include "Quiz.h"        // Include the Quiz header file
 #include "QuizManager.h" // Include the QuizManager header file
 
+using namespace std;
+
 // Forward Declarations
 class User;
 class SubAdmin;
 class Admin;
 class SuperAdmin;
 class Student;
-
-//   CS  list<string> courses = {"Introduction to Computer Science (CS 101)", "Data Structures and Algorithms (CS 201)", "Computer Organization and Architecture (CS 220)", "Database Management Systems (CS 301)", "Operating Systems (CS 330)", "Software Engineering (CS 401)"};
-
-//   EE  list<string> courses = {"Circuit Analysis (Course Code: EE101)", "Digital Electronics (Course Code: EE204)", "Electromagnetic Fields and Waves (Course Code: EE301)", "Power Systems Analysis (Course Code: EE402)", "Control Systems (Course Code: EE501)", "Electronics and VLSI Design (Course Code: EE601)"};
-
-//   SE  list<string> courses = {"Introduction to Software Engineering (Course Code: SE101)", "Object-Oriented Programming (Course Code: SE201)", "Software Requirements and Analysis (Course Code: SE301)", "Software Design and Architecture (Course Code: SE401)", "Software Testing and Quality Assurance (Course Code: SE501)", "Software Project Management (Course Code: SE601)"};
-
-//   CE  list<string> courses = {"Digital Logic Design (ECE 201)", "Embedded Systems (ECE 415)", "Computer Organization and Architecture (ECE 301)", "Digital Signal Processing (ECE 440)", "Electronics (ECE 320)", "Computer Networks (ECE 401)"};
-
-//  CHE   list<string> courses = {"Introduction to Chemical Engineering (CHE 101)", "Chemical Thermodynamics (CHE 201)", "Mass Transfer and Separation Processes (CHE 301)", "Chemical Reaction Engineering (CHE 320)", "Process Control and Instrumentation (CHE 410)", "Design of Chemical Processes (CHE 420)"};
 
 // Redeclaration of Globals
 vector<Admin *> adminVector;
@@ -74,6 +66,11 @@ int usernameExistsAdmin(string username);
 
 int main()
 {
+    QuizManager quizManager(quizzes);
+    Quiz *quiz;
+    Admin *admin = new SuperAdmin("admin", "admin");
+    adminVector.push_back(admin);
+
     loadAdmins();
     loadStudents();
 
@@ -109,11 +106,6 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
     string password;
     string StudentReg;
 
-    QuizManager quizManager(quizzes);
-    Quiz *quiz;
-    Admin *admin = new SuperAdmin("admin", "admin");
-    adminVector.push_back(admin);
-
     do
     {
         cout << "================================================================\n";
@@ -124,7 +116,6 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
         cout << "\n2. Student\n";
         cout << "\n3. Exit\n";
         cout << "\nYour Selection:";
-        saveAdmins();
 
         cin >> person;
         clearScreen();
