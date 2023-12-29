@@ -31,7 +31,7 @@ public:
     void display();
 
     // Declare the method to take the quiz
-    void take(int i);
+    void take(int i,int Qnum);
 
     // method to get Questions vector
     vector<Question> getQuestions();

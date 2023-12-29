@@ -1,10 +1,13 @@
 // Include the header file for the Quiz class
 #include "Quiz.h"
 #include "ClearScreen.h"
-
+#include "Init.h"
+#include "Sleep.h"
 using namespace std;
 
 int score = 0; // Variable to keep track of the score
+bool uniqueNumber = false;
+
 // Define the map of quizzes
 map<string, Quiz> quizzes = {
     {"CS 101", Quiz("CS 101", {{"What is the output of the following C++ code?\n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int y = 20;\n    cout << x + y << endl;\n    return 0;\n}\n",
@@ -1063,55 +1066,89 @@ Quiz::Quiz(string course, std::vector<Question> questions) : course(course), que
 void Quiz::display()
 {
     int i = 0;
+    int QuestionNumber = 0;
+    vector<int> TenQuestions;
     cout << "Quiz for " << course << endl;
     cout << "---------------------" << endl;
     // Loop over the questions vector and print each question with its options
-    for (i; i < questions.size(); i++)
+
+    // for (i; i < questions.size(); i++)
+    for (i; i < 10; i++)
     {
-        cout << i + 1 << ". " << questions[i].text << endl;
-        // Loop over the options vector and print each option with a letter
-        for (int j = 0; j < questions[i].options.size(); j++)
+        // Generate a random number between 0 and the size of the questions vector
+        do
         {
-            cout << char('A' + j) << ") " << questions[i].options[j] << endl;
+
+            int QuestionNumber = generateRandomNumber(questions.size());
+            for (int ii = 0; ii < TenQuestions.size(); ii++)
+            {
+                if (TenQuestions[ii] == QuestionNumber)
+                {
+                    uniqueNumber = false;
+                    break;
+                }
+            }
+            uniqueNumber = true;
+            TenQuestions.push_back(QuestionNumber);
+
+        } while (!uniqueNumber);
+
+        cout << i + 1 << ". " << questions[QuestionNumber].text << endl;
+        // Loop over the options vector and print each option with a letter
+        for (int j = 0; j < questions[QuestionNumber].options.size(); j++)
+        {
+            cout << char('A' + j) << ") " << questions[QuestionNumber].options[j] << endl;
         }
         cout << endl;
-        take(i);
+        take(i, QuestionNumber);
         clearScreen();
     }
     cout << "Your score is " << score << " out of " << i << endl;
 }
 
 // Define the method to take the quiz
-void Quiz::take(int i)
+void Quiz::take(int i, int Qnum)
 {
 
-    cout << "Enter your answer for question " << i + 1 << ": ";
     char answer;
-    cin >> answer;
-    // Convert the answer to uppercase
-    answer = toupper(answer);
+
     // Compare the answer with the correct answer and print feedback
-    switch (answer)
+    do
     {
-    case 'A':
-    case 'B':
-    case 'C':
-    case 'D':
-    case 'E':
-        if (answer == questions[i].answer)
+        cout << "Enter your answer for question " << i + 1 << ": ";
+        cin >> answer;
+        // Convert the answer to uppercase
+        answer = toupper(answer);
+
+        uniqueNumber = true;
+        switch (answer)
         {
-            cout << "Correct! " << questions[i].answer << " is the correct Option" << endl;
-            score++;
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+            if (answer == questions[Qnum].answer)
+            {
+                cout << "Correct! " << questions[Qnum].answer << " is the correct Option" << endl;
+                uniqueNumber = true;
+                score++;
+                mySleep(1);
+            }
+            else
+            {
+                cout << "Wrong! The correct answer is " << questions[Qnum].answer << endl;
+                uniqueNumber = true;
+                mySleep(1);
+            }
+            break;
+        default:
+            cout << "Invalid answer!" << endl;
+            mySleep(1);
+            uniqueNumber = false;
+            break;
         }
-        else
-        {
-            cout << "Wrong! The correct answer is " << questions[i].answer << endl;
-        }
-        break;
-    default:
-        cout << "Invalid answer!" << endl;
-        break;
-    }
+    } while (!uniqueNumber);
     cout << endl;
 }
 

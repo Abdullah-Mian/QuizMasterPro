@@ -27,5 +27,8 @@ extern int usernameExists(string registration);
 // Function to check if a username exists in a vector of Admins
 extern int usernameExistsAdmin(string username);
 
+// Function to generate a random number 
+int generateRandomNumber(int n);
+
 
 #endif // INIT_H
