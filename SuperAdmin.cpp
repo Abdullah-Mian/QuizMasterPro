@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "ClearScreen.h"
+#include "Init.h"
 
 using namespace std;
 
@@ -46,9 +47,9 @@ void SuperAdmin::addSubAdmin()
 void SuperAdmin::viewSubAdmins() const
 {
     cout << "Sub-Admins: " << endl;
-    for (int i = 0; i < SubAdminsVector.size(); i++)
+    for (int i = 0; i < adminVector.size(); i++)
     {
-        cout << "Username: " << SubAdminsVector[i].getUsername() << endl;
+        cout << "Username: " << adminVector[i]->getUsername() << endl;
     }
 }
 
@@ -64,9 +65,9 @@ void SuperAdmin::deleteSubAdmin()
     cin >> username;
 
     // Search for the sub-admin
-    for (int i = 0; i < SubAdminsVector.size(); i++)
+    for (int i = 0; i < adminVector.size(); i++)
     {
-        if (SubAdminsVector[i].getUsername() == username)
+        if (toLowerCase(adminVector[i]->getUsername()) == toLowerCase(username))
         {
             cout << "Do you want to delete " << username << " ? (y/n): ";
             char choice;
@@ -74,7 +75,7 @@ void SuperAdmin::deleteSubAdmin()
             if (choice == 'y')
             {
                 // Delete the sub-admin
-                SubAdminsVector.erase(SubAdminsVector.begin() + i);
+                adminVector.erase(adminVector.begin() + i);
                 cout << "Sub-Admin Deleted Successfully!" << endl;
                 return;
             }
@@ -85,6 +86,7 @@ void SuperAdmin::deleteSubAdmin()
             }
             return;
         }
+        
     }
     cout << "Sub-Admin Not Found!" << endl;
 }

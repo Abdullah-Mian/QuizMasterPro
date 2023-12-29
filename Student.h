@@ -13,11 +13,6 @@ class Admin;
 class Student;
 extern vector<Student *> studentVector;
 extern vector<string> degree_programs;
-extern vector<string> CScourses;
-extern vector<string> EEcourses;
-extern vector<string> SEcourses;
-extern vector<string> CEcourses;
-extern vector<string> CHEcourses;
 extern map<string, vector<string>> degreeCourses;
 extern map<string, vector<string>> degreeCoursesCodes;
 class Student

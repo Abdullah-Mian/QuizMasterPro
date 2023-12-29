@@ -81,6 +81,7 @@ void saveStudents()
 // Function to save admins to file
 void saveAdmins()
 {
+    adminVector.erase(adminVector.begin());
     ofstream outFile("Admins.txt");
 
     // Check if the file is open

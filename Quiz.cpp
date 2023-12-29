@@ -1079,7 +1079,7 @@ void Quiz::display()
         do
         {
 
-            int QuestionNumber = generateRandomNumber(questions.size());
+            QuestionNumber = generateRandomNumber(questions.size());
             for (int ii = 0; ii < TenQuestions.size(); ii++)
             {
                 if (TenQuestions[ii] == QuestionNumber)
@@ -1103,6 +1103,8 @@ void Quiz::display()
         take(i, QuestionNumber);
         clearScreen();
     }
+
+    TenQuestions.clear();
     cout << "Your score is " << score << " out of " << i << endl;
 }
 
@@ -1131,6 +1133,7 @@ void Quiz::take(int i, int Qnum)
             if (answer == questions[Qnum].answer)
             {
                 cout << "Correct! " << questions[Qnum].answer << " is the correct Option" << endl;
+                cout << "vector number" << Qnum << endl;
                 uniqueNumber = true;
                 score++;
                 mySleep(1);
@@ -1138,6 +1141,7 @@ void Quiz::take(int i, int Qnum)
             else
             {
                 cout << "Wrong! The correct answer is " << questions[Qnum].answer << endl;
+                cout << "vector number" << Qnum << endl;
                 uniqueNumber = true;
                 mySleep(1);
             }

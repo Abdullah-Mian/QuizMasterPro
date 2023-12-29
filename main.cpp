@@ -185,8 +185,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                         cout << "================================================================\n";
                         cout << "                        View SubAdmins\n";
                         cout << "================================================================\n\n";
-                        ((SuperAdmin *)admin)->viewSubAdmins();
-
+                        adminVector[index]->viewSubAdmins();
                         cout << "Enter Any Character to continue...";
                         cin >> stroke;
                         clearScreen();
@@ -196,7 +195,7 @@ ____ _  _ _ ___  _  _ ____ ____ ___ ____ ____ ___  ____ ____
                         cout << "================================================================\n";
                         cout << "                        Delete SubAdmin\n";
                         cout << "================================================================\n\n";
-                        ((SuperAdmin *)admin)->deleteSubAdmin();
+                        adminVector[index]->deleteSubAdmin();
                         cout << "Enter Any Character to continue...";
                         cin >> stroke;
                         clearScreen();
