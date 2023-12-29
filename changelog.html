@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP PROJECT CHANGELOG</title>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        a {
+            display: block;
+            margin: 20px;
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .cpp-icon {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://www.transparenttextures.com/patterns/dark-denim-3.png');
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        /* Dark/Light mode toggle button */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>OOP PROJECT CHANGELOG</h1>
+
+<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/main/" target="_blank">
+    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Abdullah
+</a>
+<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Faizy" target="_blank">
+    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Faizan
+</a>
+<a href="https://github.com/Abdullah-Mian/QuizMasterPro/commits/Ali" target="_blank">
+    <i class="icon fas fa-code"></i> <i class="cpp-icon">&#9733;</i> Open Changelog of Ali
+</a>
+
+<!-- Dark/Light mode toggle button -->
+<button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+
+<script>
+    function toggleMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+</script>
+
+</body>
+</html>

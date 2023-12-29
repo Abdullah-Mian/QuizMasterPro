@@ -1,3 +1,4 @@
+<!-- Obsolete Commands  -->
 # Compile each source file into object files
 g++ -c main.cpp -o main.o
 g++ -c Sleep.cpp -o Sleep.o
@@ -18,7 +19,7 @@ g++ main.o Sleep.o Admin.o SubAdmin.o SuperAdmin.o Student.o ClearScreen.o Init.
 
 
 
-<!-- # Compile and link all the .cpp files in the current directory
+# Compile and link all the .cpp files in the current directory
 g++ *.cpp -o QuizMasterPro
 
 # Run the executable
