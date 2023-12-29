@@ -81,5 +81,6 @@ This is a Command Line Interface (CLI) based C++ application for quiz taking. Th
 ## Notes
 - The application includes sleep functions for simulating real-time updates.
 - The `clearScreen` function is used to clear the console screen for better user experience.
+- For Changelogs, refer to the changelog.html file included.   
 
 # Made with Love By Abdullah, Faizan, and Ali ♥‿♥
